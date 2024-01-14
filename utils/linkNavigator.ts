@@ -14,22 +14,37 @@ export const LINK_PRODUCT: HrefLink[] = [
         label: 'Details product',
     }
 ]
+export const LINK_SUPPLY: HrefLink[] = [
+    {
+        href: '/supply/new',
+        label: 'New supply',
+    },
+    {
+        href: '/supply/view-supply',
+        label: 'View supply',
+    },
+    {
+        href: '/supply/detais',
+        label: 'Details supplies',
+    },
+
+]
 
 export const LINK_SETTINGS: HrefLink[] = [
     {
-        href: '/',
+        href: '/settings/company',
         label: 'Company Information',
     },
     {
-        href: '/',
+        href: '/settings/paymentNotice',
         label: 'Payment notifications',
     },
     {
-        href: '/',
+        href: '/settings/users',
         label: 'Users',
     },
     {
-        href: '/',
+        href: '/settings/role',
         label: 'Role authorization'
     }
 ]
@@ -43,12 +58,20 @@ export const LINK_RAPPORT: HrefLink[] = [
         label: 'Sales by Customer'
     },
     {
-        href: '/',
+        href: '/rapport/purchase',
+        label: 'Purchase history'
+    },
+    {
+        href: '/rapport/sales',
         label: 'Purchases/Sales'
     },
     {
-        href: '/',
-        label: 'Purchases/Sales'
+        href: '/rapport/inventory',
+        label: 'Inventory'
+    },
+    {
+        href: '/rapport/stocksheet',
+        label: 'Stock Information'
     },
 ]
 

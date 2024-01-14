@@ -8,7 +8,9 @@ const AdminPanel = dynamic(() => import('./AdminPanel'), {
 });
 
 const MainAppLayout: FunctionComponent<PropsWithChildren> = ({ children }) => {
-    return <AdminPanel>{children}</AdminPanel>;
+    return <AdminPanel>
+        {children}
+    </AdminPanel>;
 };
 
 export default MainAppLayout;

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { IoIosArrowDown, IoIosRefresh } from "react-icons/io";
 import { MdKeyboardDoubleArrowRight, MdOutlineBookmarkAdded } from "react-icons/md";
 import { usePathname } from 'next/navigation';
-import { LINK_PRODUCT, LINK_RAPPORT, LINK_SETTINGS } from '@/utils/linkNavigator';
+import { LINK_PRODUCT, LINK_RAPPORT, LINK_SETTINGS, LINK_SUPPLY } from '@/utils/linkNavigator';
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import { HrefLink } from '@/types';
@@ -11,6 +11,8 @@ import { HiOutlineDocumentReport } from "react-icons/hi";
 import { LINK_GRICOM } from '@/utils/LinkNavigator';
 import ActiveLink from '../global/Navigator';
 import { MdProductionQuantityLimits } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
+import { BsBasket3 } from 'react-icons/bs';
 
 
 const Sidebar = () => {
@@ -59,6 +61,13 @@ const Sidebar = () => {
 
 
     const items: CollapseProps['items'] = [];
+    items.push(
+        RenderItem({
+            headerText: 'Supplies',
+            icon: <BsBasket3 className='text-xl' />,
+            links: LINK_SUPPLY
+        })
+    );
     items.push(
         RenderItem({
             headerText: 'Products',

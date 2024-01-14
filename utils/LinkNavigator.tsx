@@ -16,10 +16,4 @@ export const LINK_GRICOM: HrefLink[] = [
         label: "Dashboard",
         icon: <AiOutlineDashboard className='text-xl' />
     },
-    {
-        href: '/products',
-        label: "Produicts",
-        icon: <BsBasket3 className='text-xl' />
-    },
-
 ]

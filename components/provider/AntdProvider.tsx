@@ -1,5 +1,6 @@
 import { ConfigProvider } from 'antd';
 import ModalManager from './ModalManager';
+import NextTopLoader from 'nextjs-toploader';
 
 const AntdLayout = ({
     children,
@@ -34,6 +35,7 @@ const AntdLayout = ({
             }}
         >
             <ModalManager />
+
             {children}
         </ConfigProvider>
     );

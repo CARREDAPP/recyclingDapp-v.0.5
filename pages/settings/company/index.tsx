@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Releases() {
+function Company() {
     return (
         <main>
 
@@ -8,4 +8,4 @@ function Releases() {
     )
 }
 
-export default Releases
+export default Company
