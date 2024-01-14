@@ -2,9 +2,9 @@ import React from 'react'
 
 function Helpers() {
     return (
-        <div>
+        <main>
 
-        </div>
+        </main>
     )
 }
 

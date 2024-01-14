@@ -2,6 +2,7 @@ import React from 'react';
 import { Breadcrumb } from 'antd';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { HrefLink } from '@/types';
 
 interface IPageBreadcrumbProps {
     breadcrumbItems: HrefLink[];

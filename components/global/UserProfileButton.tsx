@@ -3,7 +3,7 @@ import Link from 'next/link';
 export const UserProfileButton = () => {
 	return (
 		<div className='hs-dropdown relative inline-flex [--placement:bottom-right]'>
-			<button
+			{/* <button
 				id='hs-dropdown-with-header'
 				type='button'
 				className='hs-dropdown-toggle inline-flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] rounded-full font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800'
@@ -15,7 +15,7 @@ export const UserProfileButton = () => {
 					height={38}
 					alt='Image Description'
 				/>
-			</button>
+			</button> */}
 			<div
 				className='hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700'
 				aria-labelledby='hs-dropdown-with-header'

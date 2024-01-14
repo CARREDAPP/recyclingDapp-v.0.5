@@ -1,3 +1,4 @@
+import { HrefLink } from "@/types"
 
 export const LINK_PRODUCT: HrefLink[] = [
     {
@@ -5,7 +6,7 @@ export const LINK_PRODUCT: HrefLink[] = [
         label: 'New Product',
     },
     {
-        href: '/products/new',
+        href: '/products/category',
         label: 'New Category',
     },
     {
@@ -40,6 +41,10 @@ export const LINK_RAPPORT: HrefLink[] = [
     {
         href: '/rapport/customer',
         label: 'Sales by Customer'
+    },
+    {
+        href: '/',
+        label: 'Purchases/Sales'
     },
     {
         href: '/',
