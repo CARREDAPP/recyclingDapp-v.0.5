@@ -16,9 +16,10 @@ module.exports = {
       },
       animation: {
         bounce: 'bounce 10s linear infinite',
-        spin: "spin 1s linear infinite",
-        spn: "spin 10s linear infinite"
+        spin: "spin 15s linear infinite",
+        spn: "spin 1s linear infinite",
       },
+
       colors: {
         primary: {
           900: '#006064',

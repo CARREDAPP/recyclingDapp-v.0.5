@@ -32,6 +32,7 @@
     "pages/middleware.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "node_modules/.pnpm/preline@2.0.2/node_modules/preline/dist/preline.js"
   ]
 }
