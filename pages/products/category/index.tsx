@@ -1,10 +1,13 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
+import { showModal } from '@/components/redux/show-modal/slice.showmodal';
+import useAppDispatch from '@/hook/use-dispatch';
 import { LINK_PRODUCT } from '@/utils/linkNavigator';
 import { Input, Table } from 'antd';
 import React, { useState } from 'react'
 
 function Category() {
     const [filter, setfilter] = useState<string | undefined>('');
+    const { dispatch } = useAppDispatch();
 
     return (
         <main>
@@ -13,7 +16,7 @@ function Category() {
                     <PageBreadcrumb breadcrumbItems={LINK_PRODUCT} />
                 </div>
                 <div className='py-1 w-full justify-between  box lg:flex items-center '>
-                    <button style={{ backgroundColor: "#006064" }} className='text-white h-8 rounded font-medium px-2' onClick={() => null}>New Category</button>
+                    <button style={{ backgroundColor: "#006064" }} className='text-white h-8 rounded font-medium px-2' onClick={() => dispatch(showModal('show-category'))}>New Category</button>
                     <Input.Search
                         onChange={(e) => setfilter(e.target.value)}
                         onSearch={(v) => setfilter(v)}
