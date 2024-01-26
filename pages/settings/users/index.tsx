@@ -1,10 +1,13 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
+import { showModal } from '@/components/redux/show-modal/slice.showmodal';
+import useAppDispatch from '@/hook/use-dispatch';
 import { LINK_SETTINGS } from '@/utils/linkNavigator';
 import { Input, Table } from 'antd';
 import React, { useState } from 'react'
 
 function Users() {
     const [filter, setfilter] = useState<string | undefined>('');
+    const { dispatch } = useAppDispatch()
 
     return (
         <main>
@@ -13,7 +16,7 @@ function Users() {
                     <PageBreadcrumb breadcrumbItems={LINK_SETTINGS} />
                 </div>
                 <div className='py-1 w-full justify-between  box lg:flex items-center '>
-                    <button style={{ backgroundColor: "#006064" }} className='text-white h-8 rounded font-medium px-2' onClick={() => null}>New user</button>
+                    <button style={{ backgroundColor: "#006064" }} className='text-white h-8 rounded font-medium px-2' onClick={() => dispatch(showModal('show-user'))}>New user</button>
                     <Input.Search
                         onChange={(e) => setfilter(e.target.value)}
                         onSearch={(v) => setfilter(v)}

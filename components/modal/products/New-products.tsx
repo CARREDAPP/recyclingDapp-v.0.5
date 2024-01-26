@@ -1,6 +1,6 @@
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useAppDispatch from '@/hook/use-dispatch'
-import { Button, Form, Input, Modal } from 'antd'
+import { Button, Form, Input, Modal, Select } from 'antd'
 import React from 'react'
 
 function NewProducts() {
@@ -66,15 +66,26 @@ function NewProducts() {
                 </Form.Item>
                 <Form.Item
                     style={{ marginBottom: '6px' }}
-                    label={'Designation'}
-                    name={'designation'}
+                    label={'Catégorie'}
+                    name={'categorie'}
                     rules={[
                         {
                             required: true,
-                            message: "Veuillez saisir la designation",
+                            message: "Please select category"
                         },
                     ]}>
-                    <Input size='middle' placeholder='Entrez la designation' />
+                    <Select className='w-full' size='middle' placeholder='Enter Category'
+                        options={[
+                            {
+                                label: 'General',
+                                value: 'General'
+                            },
+                            {
+                                label: 'Boursier',
+                                value: 'Boursier'
+                            },
+                        ]}
+                    />
                 </Form.Item>
                 <Form.Item
                     style={{ marginBottom: '6px' }}
@@ -86,7 +97,7 @@ function NewProducts() {
                             message: "Please enter description",
                         },
                     ]}>
-                    <Input size='middle' placeholder='Enter description' />
+                    <Input.TextArea size='middle' placeholder='Enter description' />
                 </Form.Item>
                 <div className='flex items-center w-full justify-end'>
                     <Form.Item style={{ marginTop: '10px' }}>

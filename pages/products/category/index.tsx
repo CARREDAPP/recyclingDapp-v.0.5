@@ -43,94 +43,37 @@ function Category() {
                             align: "center",
                             filterMultiple: true,
                             responsive: ['lg'],
-                            width: "5%",
-                            // render: (_, data) => <span className="text-[13px]">{data?.id}</span>
+                            width: 70,
 
                         },
                         {
-                            title: "Désignation",
+                            title: "Designation",
                             dataIndex: "designation",
                             key: "designation",
-                            width: "30%",
                             ellipsis: true,
-                            // filteredValue: [filter!],
-                            // onFilter: (v: any, r) => {
-                            //     return (r.designation?.toLowerCase()?.includes(v?.toLowerCase()))
-                            // },
+
 
                         },
                         {
-                            title: "Catégories",
-                            dataIndex: "categories",
-                            key: "categories",
-                            width: "15%",
+                            title: "Description",
+                            dataIndex: "description",
+                            key: "description",
                             ellipsis: true,
                             responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data?.categoryproduit?.designation}</span>
-                        },
-                        {
-                            title: "Forme",
-                            dataIndex: "forme",
-                            key: "forme",
-                            width: "10%",
-                            ellipsis: true,
-                            responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data.forme}</span>
-                        },
-                        {
-                            title: "Qte alerte",
-                            dataIndex: "qte",
-                            key: "qte",
-                            width: "8%",
-                            ellipsis: true,
-                            responsive: ['lg'],
-                            // render: (_, data) => {
-                            //     const value = data.stocks.map(i => i.qteDepot);
-                            //     let alerte = data.qteAlerte >= value[0]
-                            //     return <Tag color={`${alerte ? `red` : "success"}`} className="h-3 w-3 rounded-full"></Tag>
-                            // }
-                        },
-                        {
-                            title: "Prix gros",
-                            dataIndex: "pugros",
-                            key: "pugros",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <span className="text-[13px]">{data.pugros}</span>
-                        },
-                        {
-                            title: "Prix détail",
-                            dataIndex: "pudetail",
-                            key: "pudetail",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <span className="text-[13px]">{data.pudetail}</span>
-                        },
-                        {
-                            title: "is-Expire",
-                            dataIndex: "createdAt",
-                            key: "createdAt",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <Tag color="red" icon={<BiImageAdd />} className="text-[14px] flex items-center justify-center space-x-1 cursor-pointer w-24">Parcourir</Tag>
                         },
 
                         {
                             title: "createdAt",
                             dataIndex: "createdAt",
                             key: "createdAt",
-                            width: "10%",
                             ellipsis: true,
                             responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data.createdAt.slice(0, 10)}</span>
                         },
                         {
-                            title: "",
+                            title: "Action",
                             dataIndex: "createdAt",
                             key: "createdAt",
-                            width: "10%",
                             ellipsis: true,
-                            // render: (_, data) => <Tag color="red" icon={<BiImageAdd />} className="text-[14px] flex items-center justify-center space-x-1 cursor-pointer w-24">Parcourir</Tag>
                         },
 
                     ]}
