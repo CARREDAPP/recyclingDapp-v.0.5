@@ -82,7 +82,7 @@ const Navbar = () => {
                     href='#'
                     aria-label='Brand'
                 >
-                    AGRICOME
+                    Care-dAPPs
                 </Link>
             </div>
             <div className='w-full flex items-center justify-end ml-auto sm:justify-between sm:gap-x-3 sm:order-3'>

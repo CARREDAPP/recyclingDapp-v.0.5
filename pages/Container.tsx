@@ -17,7 +17,7 @@ const Container = ({ children }: { children: React.ReactNode }) => {
         <>
             <ReduxProvider>
                 <NextTopLoader
-                    color='#1F6FEB'
+                    color='#006064'
                     initialPosition={0.08}
                     crawlSpeed={200}
                     height={3}

@@ -11,7 +11,7 @@ const AntdLayout = ({
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: '#1A97F5',
+                    colorPrimary: '#006064',
                     fontFamily: 'Cairo',
                 },
                 components: {

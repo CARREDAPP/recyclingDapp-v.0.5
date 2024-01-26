@@ -11,13 +11,15 @@ import Layout from '@/components/layouts/layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-    // <Container>
-    //   <MainAppLayout>
+    <Container>
+      <MainAppLayout>
+        {/* <Layout> */}
+        <Component {...pageProps} />
+        {/* </Layout> */}
+      </MainAppLayout>
+    </Container>
 
-    //   </MainAppLayout>
-    // </Container>
+
+
   )
 }

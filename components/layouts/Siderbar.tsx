@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { IoIosArrowDown, IoIosRefresh } from "react-icons/io";
-import { MdKeyboardDoubleArrowRight, MdOutlineBookmarkAdded } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { usePathname } from 'next/navigation';
 import { LINK_PRODUCT, LINK_RAPPORT, LINK_SETTINGS, LINK_SUPPLY } from '@/utils/linkNavigator';
 import type { CollapseProps } from 'antd';
@@ -11,7 +11,6 @@ import { HiOutlineDocumentReport } from "react-icons/hi";
 import { LINK_GRICOM } from '@/utils/LinkNavigator';
 import ActiveLink from '../global/Navigator';
 import { MdProductionQuantityLimits } from "react-icons/md";
-import { MdAddShoppingCart } from "react-icons/md";
 import { BsBasket3 } from 'react-icons/bs';
 
 
@@ -45,8 +44,8 @@ const Sidebar = () => {
                         <li key={i} className='my-2 scale-95 hover:scale-100 duration-500'>
                             <Link
                                 href={link.href}
-                                className={`hover:text-[#0ea5e9] duration-150 flex gap-2 items-center ${pathname ===
-                                    link.href && 'text-[#0ea5e9] font-bold'}`}>
+                                className={`hover:text-[#006064] duration-150 flex gap-2 items-center ${pathname ===
+                                    link.href && 'text-[#006064] font-bold'}`}>
                                 <MdKeyboardDoubleArrowRight className='text-[14px]' />
                                 {link.label}
                             </Link>
@@ -99,7 +98,7 @@ const Sidebar = () => {
                     className='flex-none text-xl font-bold text-center text-[#35597B] dark:text-white'
                     href='/'
                     aria-label='Brand'>
-                    RECYCLINGDAPP
+                    Care dAPPs
                 </Link>
             </div>
 
