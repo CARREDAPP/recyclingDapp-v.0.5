@@ -5,7 +5,7 @@ interface HrefLink {
     icon?: any
 }
 interface IGlobal {
-    id?: string | number;
+    id?: string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     deletedAt?: Date | string;
@@ -21,7 +21,10 @@ interface IPOSTCategory {
     data: ICategory,
     msg: string
 }
-
+interface IUPDATECategory {
+    data: ICategory,
+    msg: string
+}
 interface IGETCategory {
     data: ICategory[],
     msg: string

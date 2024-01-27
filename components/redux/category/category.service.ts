@@ -46,26 +46,26 @@ export const postCategorie: AsyncThunkPayloadCreator<IPOSTCategory, any> = async
     }
 }
 
-// export const updateUe: AsyncThunkPayloadCreator<IPatchUniteEnseignement, any> = async (payload, thunkAPI) => {
-//     try {
-//         const { auth: { profile } } = thunkAPI.getState() as RootState;
-//         const { form, ...body } = payload;
-//         const response: AxiosResponse<IPatchUniteEnseignement> = await axios.patch(`${BASE_API_URL}ue/update?id=${payload.id}`, body, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 Authorization: `Bearer ${profile?.token}`
+export const updateUe: AsyncThunkPayloadCreator<IUPDATECategory, any> = async (payload, thunkAPI) => {
+    try {
+        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { form, ...body } = payload;
+        const response: AxiosResponse<IUPDATECategory> = await axios.patch(`${BASE_URL}category/update?id=${payload.id}`, body, {
+            headers: {
+                'Content-Type': 'application/json',
+                // Authorization: `Bearer ${profile?.token}`
 
-//             }
-//         });
-//         UseRestartField(form);
-//         return response.data;
-//     } catch (error) {
-//         return axios.isAxiosError(error)
-//             ? thunkAPI.rejectWithValue(returnApiError(error))
-//             : thunkAPI.rejectWithValue('Auth error')
+            }
+        });
+        UseRestartField(form);
+        return response.data;
+    } catch (error) {
+        return axios.isAxiosError(error)
+            ? thunkAPI.rejectWithValue(returnApiError(error))
+            : thunkAPI.rejectWithValue('Auth error')
 
-//     }
-// }
+    }
+}
 
 // export const deleteUe: AsyncThunkPayloadCreator<IPatchUniteEnseignement, any> = async (payload, thunkAPI) => {
 //     try {

@@ -1,13 +1,19 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
+import PopConfirm from '@/components/modal/pop-confirm/pop-confirm';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useCategory from '@/hook/use-category';
 import useAppDispatch from '@/hook/use-dispatch';
 import { LINK_PRODUCT } from '@/utils/linkNavigator';
 import { Input, Table } from 'antd';
+import dayjs from 'dayjs';
 import React, { useState } from 'react'
+import { FaDeleteLeft, FaRegCreditCard } from 'react-icons/fa6';
+import { GrUpdate } from "react-icons/gr";
 
 function Category() {
     const [filter, setfilter] = useState<string | undefined>('');
+    const [open, setOpen] = useState(false);
+    const [currentId, setCurrentId] = useState('');
     const { GET_CATEGORY, status, dispatch } = useCategory();
 
     return (
@@ -46,6 +52,7 @@ function Category() {
                             filterMultiple: true,
                             responsive: ['lg'],
                             width: 70,
+                            render: (_, items, index) => index + 1
 
                         },
                         {
@@ -70,12 +77,46 @@ function Category() {
                             key: "createdAt",
                             ellipsis: true,
                             responsive: ['lg'],
+                            align: 'center',
+                            width: 150,
+                            render: (_, items, index) => dayjs(items.createdAt).format('YYYY-MM-DD')
                         },
                         {
                             title: "Action",
                             dataIndex: "createdAt",
                             key: "createdAt",
+                            align: 'center',
                             ellipsis: true,
+                            width: 100,
+                            render: (e, _) => {
+                                return <div className='flex items-center justify-center space-x-3'>
+                                    <button onClick={() => {
+
+                                    }} className='bg-[#006064] p-1 rounded-lg w-8 h-8 shadow-2xl shadow-slate-700 border flex items-center justify-center text-white'><GrUpdate />
+                                    </button>
+
+                                    <PopConfirm
+                                        okButtonProps={{ loading: false, style: { backgroundColor: "#ef4444" } }}
+                                        onCancel={() => setOpen(false)}
+                                        open={(_.id === currentId) ? open : false}
+                                        onConfirm={() => null}
+                                        placement='left'
+                                        title='Notifications'
+                                        description="Souhaitez-vous effacer cette unité d'enseignement ?"
+                                        children={
+                                            <button onClick={() => {
+                                                setCurrentId(_.id!)
+                                                setOpen(prev => !prev)
+                                            }} className='bg-red-700 p-1 rounded-lg w-8 h-8 shadow-2xl shadow-red-700 border flex items-center justify-center text-white'><FaDeleteLeft />
+                                            </button>
+                                        }
+
+                                    />
+
+
+
+                                </div>
+                            }
                         },
 
                     ]}

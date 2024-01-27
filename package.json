@@ -19,6 +19,7 @@
     "aos": "^2.3.4",
     "autoprefixer": "10.4.14",
     "axios": "^1.6.2",
+    "dayjs": "^1.11.10",
     "framer-motion": "^8.5.5",
     "js-cookie": "^3.0.5",
     "leaflet": "^1.9.3",
