@@ -70,6 +70,24 @@ const categoryService = createSlice({
     reducers: {
         setCategoryUpdate: (state, { payload }) => {
             state.DATA_CATEGORY = payload;
+        },
+        setPostCategoryIsSuccess: (state, { payload }) => {
+            state.status_post.isSuccess = payload;
+        },
+        setPostCategoryIsError: (state, { payload }) => {
+            state.status_post.isError = payload;
+        },
+        setPatchCategoryIsSuccess: (state, { payload }) => {
+            state.status_update.isSuccess = payload;
+        },
+        setPatchCategoryIsError: (state, { payload }) => {
+            state.status_update.isError = payload;
+        },
+        setDeleteCategoryIsSuccess: (state, { payload }) => {
+            state.status_delete.isSuccess = payload;
+        },
+        setDeleteCategoryIsError: (state, { payload }) => {
+            state.status_delete.isError = payload;
         }
     },
     extraReducers(builder) {
@@ -83,6 +101,7 @@ const categoryService = createSlice({
                     ...state.GET_CATEGORY?.data!, payload.data
                 ]
             }
+            state.message = payload.msg;
         }).addCase(postCategories.rejected, (state, { payload }) => {
             state.status_post = STATUS.ERROR;
             state.message = payload as string
@@ -93,10 +112,10 @@ const categoryService = createSlice({
             state.GET_CATEGORY = payload;
 
         }).addCase(getCategories.rejected, (state, { payload }) => {
-            state.status_update = STATUS.ERROR;
+            state.status = STATUS.ERROR;
             state.message = payload as string
         }).addCase(updateCategories.pending, (state) => {
-            state.status = STATUS.PENDING;
+            state.status_update = STATUS.PENDING;
         }).addCase(updateCategories.fulfilled, (state, { payload }) => {
             state.status_update = STATUS.SUCCESS;
             const index = state.GET_CATEGORY?.data.findIndex(item => item?.id === payload?.data.id);
@@ -111,6 +130,7 @@ const categoryService = createSlice({
                     ]
                 };
             }
+            state.message = payload.msg;
 
         }).addCase(updateCategories.rejected, (state, { payload }) => {
             state.status_update = STATUS.ERROR;
@@ -119,7 +139,8 @@ const categoryService = createSlice({
             state.status_delete = STATUS.PENDING;
         }).addCase(deleteCategories.fulfilled, (state, { payload }) => {
             state.status_delete = STATUS.SUCCESS;
-            const index = state.GET_CATEGORY?.data?.findIndex(r => r.id === payload?.data?.id);
+            state.message = payload.msg
+            const index = state.GET_CATEGORY?.data?.findIndex(r => r.id === payload?.data);
             state.GET_CATEGORY?.data.splice(index!, 1);
         }).addCase(deleteCategories.rejected, (state, { payload }) => {
             state.status_delete = STATUS.ERROR;
@@ -130,5 +151,10 @@ const categoryService = createSlice({
 
 
 export default categoryService.reducer;
-export const { setCategoryUpdate } = categoryService.actions;
+export const {
+    setCategoryUpdate, setDeleteCategoryIsError,
+    setDeleteCategoryIsSuccess,
+    setPostCategoryIsError, setPostCategoryIsSuccess,
+    setPatchCategoryIsError, setPatchCategoryIsSuccess
+} = categoryService.actions;
 export { postCategories, getCategories, updateCategories, deleteCategories }

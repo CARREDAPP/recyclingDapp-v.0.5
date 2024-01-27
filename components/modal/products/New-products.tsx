@@ -1,10 +1,12 @@
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
+import useCategory from '@/hook/use-category';
 import useAppDispatch from '@/hook/use-dispatch'
 import { Button, Form, Input, Modal, Select } from 'antd'
 import React from 'react'
 
 function NewProducts() {
     const { dispatch } = useAppDispatch();
+    const { GET_CATEGORY } = useCategory();
     return (
         <Modal
             centered
@@ -75,16 +77,10 @@ function NewProducts() {
                         },
                     ]}>
                     <Select className='w-full' size='middle' placeholder='Enter Category'
-                        options={[
-                            {
-                                label: 'General',
-                                value: 'General'
-                            },
-                            {
-                                label: 'Boursier',
-                                value: 'Boursier'
-                            },
-                        ]}
+                        options={GET_CATEGORY?.data.map((items) => ({
+                            label: items?.designation,
+                            value: items?.id
+                        }))}
                     />
                 </Form.Item>
                 <Form.Item

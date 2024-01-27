@@ -34,3 +34,30 @@ interface IDELETECategory {
     data: ICategory,
     msg: string
 }
+
+
+interface IProducts extends IGlobal {
+    designation: string,
+    description: string,
+    price: number,
+    units: string,
+    qteAlerte: number,
+    entrepriseId?: string,
+    categoryId?: string,
+}
+interface IPOSTProducts {
+    data: IProducts,
+    msg: string
+}
+interface IDELETEProducts {
+    data: IProducts,
+    msg: string
+}
+interface IUDATEProducts {
+    data: IProducts,
+    msg: string
+}
+interface IGETProducts {
+    data: IProducts[],
+    msg: string
+}

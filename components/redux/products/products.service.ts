@@ -5,10 +5,10 @@ import { BASE_URL } from "@/components/helpers/helpers.api";
 import UseRestartField from "@/hook/Use-restartField";
 import { returnApiError } from "@/components/helpers/api.error.handler";
 
-export const getCategorie: AsyncThunkPayloadCreator<IGETCategory> = async (_, thunkAPI) => {
+export const getProducts: AsyncThunkPayloadCreator<IGETProducts> = async (_, thunkAPI) => {
     try {
         // const { auth: { profile } } = thunkAPI.getState() as RootState;
-        const response: AxiosResponse<IGETCategory> = await axios.get(`${BASE_URL}category`, {
+        const response: AxiosResponse<IGETProducts> = await axios.get(`${BASE_URL}products`, {
             headers: {
                 "Content-Type": "application/json",
                 // Authorization: `Bearer ${profile?.token}`
@@ -24,12 +24,12 @@ export const getCategorie: AsyncThunkPayloadCreator<IGETCategory> = async (_, th
     }
 }
 
-export const postCategorie: AsyncThunkPayloadCreator<IPOSTCategory, any> = async (payload, thunkAPI) => {
+export const postProducts: AsyncThunkPayloadCreator<IPOSTProducts, any> = async (payload, thunkAPI) => {
     try {
         // const { auth: { profile } } = thunkAPI.getState() as RootState;
         const { form, ...body } = payload;
         console.log(payload)
-        const response: AxiosResponse<IPOSTCategory> = await axios.post(`${BASE_URL}category/add`, body, {
+        const response: AxiosResponse<IPOSTProducts> = await axios.post(`${BASE_URL}products/add`, body, {
             headers: {
                 "Content-Type": "application/json",
                 // Authorization: `Bearer ${profile?.token}`
@@ -46,11 +46,11 @@ export const postCategorie: AsyncThunkPayloadCreator<IPOSTCategory, any> = async
     }
 }
 
-export const updateCategory: AsyncThunkPayloadCreator<IUPDATECategory, any> = async (payload, thunkAPI) => {
+export const updateProducts: AsyncThunkPayloadCreator<IUDATEProducts, any> = async (payload, thunkAPI) => {
     try {
         // const { auth: { profile } } = thunkAPI.getState() as RootState;
         const { form, ...body } = payload;
-        const response: AxiosResponse<IUPDATECategory> = await axios.patch(`${BASE_URL}category/update?id=${payload.id}`, body, {
+        const response: AxiosResponse<IUDATEProducts> = await axios.patch(`${BASE_URL}products/update?id=${payload.id}`, body, {
             headers: {
                 'Content-Type': 'application/json',
                 // Authorization: `Bearer ${profile?.token}`
@@ -67,10 +67,10 @@ export const updateCategory: AsyncThunkPayloadCreator<IUPDATECategory, any> = as
     }
 }
 
-export const deleteCategory: AsyncThunkPayloadCreator<any, any> = async (payload, thunkAPI) => {
+export const deleteProducts: AsyncThunkPayloadCreator<any, any> = async (payload, thunkAPI) => {
     try {
         // const { auth: { profile } } = thunkAPI.getState() as RootState;
-        const response: AxiosResponse<any> = await axios.delete(`${BASE_URL}category/delete?id=${payload.id}`, {
+        const response: AxiosResponse<any> = await axios.delete(`${BASE_URL}products/delete?id=${payload.id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 // Authorization: `Bearer ${profile?.token}`

@@ -8,7 +8,7 @@ import React from 'react'
 function UpdateCategory() {
     const { dispatch } = useAppDispatch();
     const [form] = Form.useForm();
-    const { DATA_CATEGORY } = useAppSelector(state => state.createCategory)
+    const { DATA_CATEGORY, status_update } = useAppSelector(state => state.createCategory)
 
     const onFinish = (e: any) => {
         const payload = {
@@ -63,7 +63,7 @@ function UpdateCategory() {
                 </Form.Item>
                 <div className='flex items-center w-full justify-end'>
                     <Form.Item style={{ marginTop: '10px' }}>
-                        <Button loading={false} size='middle' style={{ backgroundColor: '#006064' }} type="primary" htmlType='submit' >
+                        <Button loading={status_update.isLoading} size='middle' style={{ backgroundColor: '#006064' }} type="primary" htmlType='submit' >
                             Update
                         </Button>
                     </Form.Item>

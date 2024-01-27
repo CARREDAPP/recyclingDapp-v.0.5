@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from 'next/app'
 import MainAppLayout from '@/components/layouts/MainAppLayout';
 import Container from './Container';
-import Layout from '@/components/layouts/layout';
+import Toastmessage from '@/components/provider/Toastmessage';
 
 
 
@@ -13,13 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Container>
       <MainAppLayout>
-        {/* <Layout> */}
+        <Toastmessage />
         <Component {...pageProps} />
-        {/* </Layout> */}
       </MainAppLayout>
     </Container>
-
-
-
   )
 }
