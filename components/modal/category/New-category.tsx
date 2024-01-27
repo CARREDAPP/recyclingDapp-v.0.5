@@ -1,3 +1,4 @@
+import { postCategories } from '@/components/redux/category/category.slices';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useAppDispatch from '@/hook/use-dispatch';
 import { Button, Form, Input, Modal } from 'antd'
@@ -5,6 +6,16 @@ import React from 'react'
 
 function NewCategory() {
     const { dispatch } = useAppDispatch();
+    const [form] = Form.useForm();
+
+    const onFinish = (e: any) => {
+        const payload = {
+            designation: e.designation,
+            description: e.description,
+            form
+        }
+        dispatch(postCategories(payload));
+    }
     return (
         <Modal
             title={<p className='text-2xl text-slate-600 dark:text-[#f3f4f6] font-extrabold'>
@@ -17,7 +28,9 @@ function NewCategory() {
 
         >
             <Form
+                form={form}
                 layout='vertical'
+                onFinish={onFinish}
             >
                 <Form.Item
                     style={{ marginBottom: '6px' }}

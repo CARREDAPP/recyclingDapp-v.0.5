@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import SliceShowModal from './show-modal/slice.showmodal'
+import categoryService from './category/category.slices'
 
 
 const store = configureStore({
     reducer: {
-        createShownModal: SliceShowModal
+        createShownModal: SliceShowModal,
+        createCategory: categoryService
     },
 });
 

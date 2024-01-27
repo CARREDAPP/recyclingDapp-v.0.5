@@ -1,5 +1,6 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
+import useCategory from '@/hook/use-category';
 import useAppDispatch from '@/hook/use-dispatch';
 import { LINK_PRODUCT } from '@/utils/linkNavigator';
 import { Input, Table } from 'antd';
@@ -7,7 +8,7 @@ import React, { useState } from 'react'
 
 function Category() {
     const [filter, setfilter] = useState<string | undefined>('');
-    const { dispatch } = useAppDispatch();
+    const { GET_CATEGORY, status, dispatch } = useCategory();
 
     return (
         <main>
@@ -28,10 +29,11 @@ function Category() {
 
             <div className='flex-grow bg-white dark:bg-primary-dark'>
                 <Table
-                    loading={false}
+                    loading={status.isLoading}
                     bordered={false}
                     size="small"
                     showHeader={true}
+                    dataSource={GET_CATEGORY?.data}
                     sticky={true}
                     pagination={{ hideOnSinglePage: true, defaultPageSize: 25 }}
                     columns={[

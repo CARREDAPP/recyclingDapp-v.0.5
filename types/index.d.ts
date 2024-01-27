@@ -21,3 +21,8 @@ interface IPOSTCategory {
     data: ICategory,
     msg: string
 }
+
+interface IGETCategory {
+    data: ICategory[],
+    msg: string
+}
