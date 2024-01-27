@@ -29,3 +29,8 @@ interface IGETCategory {
     data: ICategory[],
     msg: string
 }
+
+interface IDELETECategory {
+    data: ICategory,
+    msg: string
+}

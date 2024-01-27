@@ -46,7 +46,7 @@ export const postCategorie: AsyncThunkPayloadCreator<IPOSTCategory, any> = async
     }
 }
 
-export const updateUe: AsyncThunkPayloadCreator<IUPDATECategory, any> = async (payload, thunkAPI) => {
+export const updateCategory: AsyncThunkPayloadCreator<IUPDATECategory, any> = async (payload, thunkAPI) => {
     try {
         // const { auth: { profile } } = thunkAPI.getState() as RootState;
         const { form, ...body } = payload;
@@ -67,21 +67,21 @@ export const updateUe: AsyncThunkPayloadCreator<IUPDATECategory, any> = async (p
     }
 }
 
-// export const deleteUe: AsyncThunkPayloadCreator<IPatchUniteEnseignement, any> = async (payload, thunkAPI) => {
-//     try {
-//         const { auth: { profile } } = thunkAPI.getState() as RootState;
-//         const response: AxiosResponse<IPatchUniteEnseignement> = await axios.delete(`${BASE_API_URL}ue/delete?id=${payload.id}`, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 Authorization: `Bearer ${profile?.token}`
+export const deleteCategory: AsyncThunkPayloadCreator<any, any> = async (payload, thunkAPI) => {
+    try {
+        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const response: AxiosResponse<any> = await axios.delete(`${BASE_URL}category/delete?id=${payload.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                // Authorization: `Bearer ${profile?.token}`
 
-//             }
-//         });
-//         return response.data;
-//     } catch (error) {
-//         return axios.isAxiosError(error)
-//             ? thunkAPI.rejectWithValue(returnApiError(error))
-//             : thunkAPI.rejectWithValue('Auth error')
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return axios.isAxiosError(error)
+            ? thunkAPI.rejectWithValue(returnApiError(error))
+            : thunkAPI.rejectWithValue('Auth error')
 
-//     }
-// }
+    }
+}

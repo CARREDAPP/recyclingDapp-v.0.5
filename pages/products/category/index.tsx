@@ -1,5 +1,6 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
 import PopConfirm from '@/components/modal/pop-confirm/pop-confirm';
+import { deleteCategories, setCategoryUpdate } from '@/components/redux/category/category.slices';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useCategory from '@/hook/use-category';
 import useAppDispatch from '@/hook/use-dispatch';
@@ -14,7 +15,7 @@ function Category() {
     const [filter, setfilter] = useState<string | undefined>('');
     const [open, setOpen] = useState(false);
     const [currentId, setCurrentId] = useState('');
-    const { GET_CATEGORY, status, dispatch } = useCategory();
+    const { GET_CATEGORY, status, dispatch, status_delete, status_update } = useCategory();
 
     return (
         <main>
@@ -91,15 +92,16 @@ function Category() {
                             render: (e, _) => {
                                 return <div className='flex items-center justify-center space-x-3'>
                                     <button onClick={() => {
-
+                                        dispatch(setCategoryUpdate(_));
+                                        dispatch(showModal('show-update-category'))
                                     }} className='bg-[#006064] p-1 rounded-lg w-8 h-8 shadow-2xl shadow-slate-700 border flex items-center justify-center text-white'><GrUpdate />
                                     </button>
 
                                     <PopConfirm
-                                        okButtonProps={{ loading: false, style: { backgroundColor: "#ef4444" } }}
+                                        okButtonProps={{ loading: status_delete.isLoading, style: { backgroundColor: "#ef4444" } }}
                                         onCancel={() => setOpen(false)}
                                         open={(_.id === currentId) ? open : false}
-                                        onConfirm={() => null}
+                                        onConfirm={() => dispatch(deleteCategories(_))}
                                         placement='left'
                                         title='Notifications'
                                         description="Souhaitez-vous effacer cette unité d'enseignement ?"
