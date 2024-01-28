@@ -68,6 +68,7 @@ export interface IUser extends IGlobal {
     username: string,
     password: string,
     is_actve?: boolean,
+    entreprise?: null
     entrepriseId?: string,
 }
 

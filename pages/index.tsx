@@ -1,6 +1,7 @@
 
 import Input, { PasswordInputLogin } from '@/components/global/CustomInput';
 import RootLayout from '@/components/layouts/LayoutLogin';
+import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import { authuser } from '@/components/redux/user/user.slice';
 import useAuth from '@/hook/use-auth';
 import useAppDispatch from '@/hook/use-dispatch';
@@ -43,10 +44,10 @@ function Home() {
           <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
             Authentification
           </h1>
-          <p className='mt-2 text-sm text-gray-600 dark:text-gray-400 space-x-2'>
-            Don't have an account yet?
-            <Link className='text-[#006064]' href={'/auth/agence'} >Register</Link>
-          </p>
+          <div className='mt-2 text-sm text-gray-600 dark:text-gray-400 space-x-2'>
+            <span>Don't have an account yet?</span>
+            <span onClick={() => dispatch(showModal('show-show-agence'))} className='text-[#006064] font-bold cursor-pointer'>Register</span>
+          </div>
         </div>
         <div className='mt-5'>
           {/* Form */}
