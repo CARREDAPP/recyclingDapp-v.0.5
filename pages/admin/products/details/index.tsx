@@ -7,6 +7,7 @@ function Details() {
     const [filter, setfilter] = useState<string | undefined>('');
 
     return (
+
         <main>
             <div>
                 <div className="w-full justify-between  box lg:flex items-center">

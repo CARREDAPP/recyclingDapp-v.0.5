@@ -1,42 +1,42 @@
 
-interface HrefLink {
+export interface HrefLink {
     href: string;
     label: string;
     icon?: any
 }
-interface IGlobal {
+export interface IGlobal {
     id?: string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     deletedAt?: Date | string;
 }
 
-interface ICategory extends IGlobal {
+export interface ICategory extends IGlobal {
     designation: string,
     description: string,
     imgUrl?: string,
 }
 
-interface IPOSTCategory {
+export interface IPOSTCategory {
     data: ICategory,
     msg: string
 }
-interface IUPDATECategory {
+export interface IUPDATECategory {
     data: ICategory,
     msg: string
 }
-interface IGETCategory {
+export interface IGETCategory {
     data: ICategory[],
     msg: string
 }
 
-interface IDELETECategory {
+export interface IDELETECategory {
     data: ICategory,
     msg: string
 }
 
 
-interface IProducts extends IGlobal {
+export interface IProducts extends IGlobal {
     designation: string,
     description: string,
     price: number,
@@ -44,20 +44,48 @@ interface IProducts extends IGlobal {
     qteAlerte: number,
     entrepriseId?: string,
     categoryId?: string,
+    category?: ICategory,
 }
-interface IPOSTProducts {
+export interface IPOSTProducts {
     data: IProducts,
     msg: string
 }
-interface IDELETEProducts {
+export interface IDELETEProducts {
     data: IProducts,
     msg: string
 }
-interface IUDATEProducts {
+export interface IUDATEProducts {
     data: IProducts,
     msg: string
 }
-interface IGETProducts {
+export interface IGETProducts {
     data: IProducts[],
+    msg: string
+}
+
+export interface IUser extends IGlobal {
+    fullname: string,
+    username: string,
+    password: string,
+    is_actve?: string
+}
+
+export interface IPOSTUser extends IGlobal {
+    data: IUser,
+    msg: string
+}
+
+export interface IUPDATEUser extends IGlobal {
+    data: IUser,
+    msg: string
+}
+
+export interface IGETUser extends IGlobal {
+    data: IUser[],
+    msg: string
+}
+
+export interface IDELETEUser extends IGlobal {
+    data: IUser,
     msg: string
 }

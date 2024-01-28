@@ -1,4 +1,4 @@
-import { postproduct } from '@/components/redux/products/products.slices';
+import { postproduct, updateproduct } from '@/components/redux/products/products.slices';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import { useAppSelector } from '@/components/redux/store';
 import useCategory from '@/hook/use-category';
@@ -6,13 +6,14 @@ import useAppDispatch from '@/hook/use-dispatch'
 import { Button, Form, Input, Modal, Select } from 'antd'
 import React from 'react'
 
-function NewProducts() {
+function UpdateProducts() {
     const { dispatch } = useAppDispatch();
     const [form] = Form.useForm()
     const { GET_CATEGORY } = useCategory();
-    const { status_post } = useAppSelector(state => state.createProducts)
+    const { status_post, DATA_PRODUCT } = useAppSelector(state => state.createProducts)
     const onFinish = (e: any) => {
         const payload = {
+            id: DATA_PRODUCT?.id,
             designation: e.designation,
             description: e.description,
             price: e.price,
@@ -21,7 +22,7 @@ function NewProducts() {
             categoryId: e.categoryId,
             form
         }
-        dispatch(postproduct(payload))
+        dispatch(updateproduct(payload))
     }
     return (
         <Modal
@@ -30,7 +31,7 @@ function NewProducts() {
             footer={[]}
             onCancel={() => dispatch(showModal('close'))}
             title={<p className='text-2xl text-slate-600 dark:text-[#f3f4f6] font-extrabold'>
-                New Products
+                Update Products
             </p>}
         >
             <Form layout='vertical'
@@ -40,6 +41,7 @@ function NewProducts() {
                 <Form.Item
                     style={{ marginBottom: '6px' }}
                     label={'Designation'}
+                    initialValue={DATA_PRODUCT?.designation}
                     name={'designation'}
                     rules={[
                         {
@@ -52,6 +54,7 @@ function NewProducts() {
                 <Form.Item
                     style={{ marginBottom: '6px' }}
                     label={'Units'}
+                    initialValue={DATA_PRODUCT?.units}
                     name={'units'}
                     rules={[
                         {
@@ -63,6 +66,7 @@ function NewProducts() {
                 </Form.Item>
                 <Form.Item
                     style={{ marginBottom: '6px' }}
+                    initialValue={DATA_PRODUCT?.price}
                     label={'Price'}
                     name={'price'}
                     rules={[
@@ -74,6 +78,7 @@ function NewProducts() {
                     <Input size='middle' placeholder='Enter the price' />
                 </Form.Item>
                 <Form.Item
+                    initialValue={DATA_PRODUCT?.qteAlerte}
                     style={{ marginBottom: '6px' }}
                     label={'Quantity alerts'}
                     name={'qteAlerte'}
@@ -103,6 +108,7 @@ function NewProducts() {
                     />
                 </Form.Item>
                 <Form.Item
+                    initialValue={DATA_PRODUCT?.description}
                     style={{ marginBottom: '6px' }}
                     label={'Description'}
                     name={'description'}
@@ -126,4 +132,4 @@ function NewProducts() {
     )
 }
 
-export default NewProducts
+export default UpdateProducts

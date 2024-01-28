@@ -2,29 +2,29 @@ import { HrefLink } from "@/types"
 
 export const LINK_PRODUCT: HrefLink[] = [
     {
-        href: '/products/new',
+        href: '/admin/products/new',
         label: 'New Product',
     },
     {
-        href: '/products/category',
+        href: '/admin/products/category',
         label: 'New Category',
     },
     {
-        href: '/products/details',
+        href: '/admin/products/details',
         label: 'Details product',
     }
 ]
 export const LINK_SUPPLY: HrefLink[] = [
     {
-        href: '/supply/new',
+        href: '/admin/supply/new',
         label: 'New supply',
     },
     {
-        href: '/supply/view-supply',
+        href: '/admin/supply/view-supply',
         label: 'View supply',
     },
     {
-        href: '/supply/detais',
+        href: '/admin/supply/detais',
         label: 'Details supplies',
     },
 
@@ -32,45 +32,45 @@ export const LINK_SUPPLY: HrefLink[] = [
 
 export const LINK_SETTINGS: HrefLink[] = [
     {
-        href: '/settings/company',
+        href: '/admin/settings/company',
         label: 'Company Information',
     },
     {
-        href: '/settings/paymentNotice',
+        href: '/admin/settings/paymentNotice',
         label: 'Payment notifications',
     },
     {
-        href: '/settings/users',
+        href: '/admin/settings/users',
         label: 'Users',
     },
     {
-        href: '/settings/role',
+        href: '/admin/settings/role',
         label: 'Role authorization'
     }
 ]
 export const LINK_RAPPORT: HrefLink[] = [
     {
-        href: '/rapport/history',
+        href: '/admin/rapport/history',
         label: 'Sales history'
     },
     {
-        href: '/rapport/customer',
+        href: '/admin/rapport/customer',
         label: 'Sales by Customer'
     },
     {
-        href: '/rapport/purchase',
+        href: '/admin/rapport/purchase',
         label: 'Purchase history'
     },
     {
-        href: '/rapport/sales',
+        href: '/admin/rapport/sales',
         label: 'Purchases/Sales'
     },
     {
-        href: '/rapport/inventory',
+        href: '/admin/rapport/inventory',
         label: 'Inventory'
     },
     {
-        href: '/rapport/stocksheet',
+        href: '/admin/rapport/stocksheet',
         label: 'Stock Information'
     },
 ]

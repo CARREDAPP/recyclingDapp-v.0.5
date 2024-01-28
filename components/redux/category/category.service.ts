@@ -4,6 +4,7 @@ import { RootState } from "../store";
 import { BASE_URL } from "@/components/helpers/helpers.api";
 import UseRestartField from "@/hook/Use-restartField";
 import { returnApiError } from "@/components/helpers/api.error.handler";
+import { IGETCategory, IPOSTCategory, IUPDATECategory } from "@/types";
 
 export const getCategorie: AsyncThunkPayloadCreator<IGETCategory> = async (_, thunkAPI) => {
     try {

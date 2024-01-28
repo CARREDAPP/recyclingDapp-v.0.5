@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { deleteProducts, getProducts, postProducts, updateProducts } from "./products.service"
 import { STATUS } from "@/components/helpers/helpers";
+import { IDELETECategory, IGETProducts, IPOSTProducts, IProducts, IUDATEProducts } from "@/types";
 
 
 const initialState: {
@@ -157,7 +158,8 @@ export const {
     setPatchProductsIsError,
     setPatchProductsIsSuccess,
     setPostProductsIsError,
-    setPostProductsIsSuccess
+    setPostProductsIsSuccess,
+    setProductsUpdate
 
 } = productsService.actions;
 export { postproduct, getproduct, updateproduct, deleteproduct }

@@ -1,15 +1,26 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
+import PopConfirm from '@/components/modal/pop-confirm/pop-confirm';
+import { deleteproduct, setProductsUpdate } from '@/components/redux/products/products.slices';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useAppDispatch from '@/hook/use-dispatch';
+import useProducts from '@/hook/use-products';
 import { LINK_PRODUCT } from '@/utils/linkNavigator';
 import { Input, Table } from 'antd';
+import dayjs from 'dayjs';
 import React, { useState } from 'react'
+import { FaDeleteLeft } from 'react-icons/fa6';
+import { GrUpdate } from 'react-icons/gr';
+import { IoCloudUploadOutline } from "react-icons/io5";
 
 function NowProducts() {
     const [filter, setfilter] = useState<string | undefined>('');
+    const [open, setOpen] = useState(false);
+    const [currentId, setCurrentId] = useState('');
     const { dispatch } = useAppDispatch();
+    const { GET_PRODUCT, status, status_delete } = useProducts();
 
     return (
+
         <main>
             <div>
                 <div className="w-full justify-between  box lg:flex items-center">
@@ -28,8 +39,9 @@ function NowProducts() {
 
             <div className='flex-grow bg-white dark:bg-primary-dark'>
                 <Table
-                    loading={false}
+                    loading={status.isLoading}
                     bordered={false}
+                    dataSource={GET_PRODUCT?.data}
                     size="small"
                     showHeader={true}
                     sticky={true}
@@ -43,94 +55,103 @@ function NowProducts() {
                             align: "center",
                             filterMultiple: true,
                             responsive: ['lg'],
-                            width: "5%",
-                            // render: (_, data) => <span className="text-[13px]">{data?.id}</span>
+                            width: 80,
+                            render: (_, data, index) => index + 1
 
                         },
                         {
-                            title: "Désignation",
+                            title: "Designation",
                             dataIndex: "designation",
                             key: "designation",
-                            width: "30%",
                             ellipsis: true,
-                            // filteredValue: [filter!],
-                            // onFilter: (v: any, r) => {
-                            //     return (r.designation?.toLowerCase()?.includes(v?.toLowerCase()))
-                            // },
+                            filteredValue: [filter!],
+                            onFilter: (v: any, r) => {
+                                return (r.designation?.toLowerCase()?.includes(v?.toLowerCase()))
+                            },
 
                         },
                         {
-                            title: "Catégories",
+                            title: "Categories",
                             dataIndex: "categories",
                             key: "categories",
-                            width: "15%",
                             ellipsis: true,
                             responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data?.categoryproduit?.designation}</span>
+                            render: (_, data, index) => data.category?.designation
                         },
                         {
-                            title: "Forme",
-                            dataIndex: "forme",
-                            key: "forme",
-                            width: "10%",
+                            title: "Units",
+                            dataIndex: "units",
+                            key: "units",
                             ellipsis: true,
                             responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data.forme}</span>
                         },
                         {
-                            title: "Qte alerte",
-                            dataIndex: "qte",
-                            key: "qte",
-                            width: "8%",
+                            title: "Price",
+                            key: "price",
                             ellipsis: true,
                             responsive: ['lg'],
-                            // render: (_, data) => {
-                            //     const value = data.stocks.map(i => i.qteDepot);
-                            //     let alerte = data.qteAlerte >= value[0]
-                            //     return <Tag color={`${alerte ? `red` : "success"}`} className="h-3 w-3 rounded-full"></Tag>
-                            // }
-                        },
-                        {
-                            title: "Prix gros",
-                            dataIndex: "pugros",
-                            key: "pugros",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <span className="text-[13px]">{data.pugros}</span>
-                        },
-                        {
-                            title: "Prix détail",
-                            dataIndex: "pudetail",
-                            key: "pudetail",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <span className="text-[13px]">{data.pudetail}</span>
-                        },
-                        {
-                            title: "is-Expire",
-                            dataIndex: "createdAt",
-                            key: "createdAt",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <Tag color="red" icon={<BiImageAdd />} className="text-[14px] flex items-center justify-center space-x-1 cursor-pointer w-24">Parcourir</Tag>
-                        },
+                            render: (_, data) => `${data.price} ₳`
 
+                        },
+                        {
+                            title: "Alert quantity",
+                            dataIndex: "qteAlerte",
+                            key: "qteAlerte",
+                            ellipsis: true,
+                            responsive: ['lg'],
+                            render: (_, data) => data.qteAlerte
+
+                        },
                         {
                             title: "createdAt",
                             dataIndex: "createdAt",
                             key: "createdAt",
-                            width: "10%",
+                            align: "center",
                             ellipsis: true,
                             responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data.createdAt.slice(0, 10)}</span>
+                            render: (_, data) => dayjs(data.createdAt).format('YYYY-MM-DD')
                         },
                         {
-                            title: "",
+                            title: "Action",
                             dataIndex: "createdAt",
                             key: "createdAt",
-                            width: "10%",
+                            align: "center",
                             ellipsis: true,
-                            // render: (_, data) => <Tag color="red" icon={<BiImageAdd />} className="text-[14px] flex items-center justify-center space-x-1 cursor-pointer w-24">Parcourir</Tag>
+                            render: (e, _) => {
+                                return <div className='flex items-center justify-center space-x-3'>
+                                    <button onClick={() => {
+                                        dispatch(setProductsUpdate(_));
+                                        dispatch(showModal('show-update-products'))
+                                    }} className='bg-[#006064] p-1 rounded-lg w-8 h-8 shadow-2xl shadow-slate-700 border flex items-center justify-center text-white'><IoCloudUploadOutline />
+                                    </button>
+                                    <button onClick={() => {
+                                        dispatch(setProductsUpdate(_));
+                                        dispatch(showModal('show-update-products'))
+                                    }} className='bg-[#006064] p-1 rounded-lg w-8 h-8 shadow-2xl shadow-slate-700 border flex items-center justify-center text-white'><GrUpdate />
+                                    </button>
+
+                                    <PopConfirm
+                                        okButtonProps={{ loading: status_delete.isLoading, style: { backgroundColor: "#ef4444" } }}
+                                        onCancel={() => setOpen(false)}
+                                        open={(_.id === currentId) ? open : false}
+                                        onConfirm={() => dispatch(deleteproduct(_))}
+                                        placement='left'
+                                        title='Notifications'
+                                        description="Souhaitez-vous effacer cette unité d'enseignement ?"
+                                        children={
+                                            <button onClick={() => {
+                                                setCurrentId(_.id!)
+                                                setOpen(prev => !prev)
+                                            }} className='bg-red-700 p-1 rounded-lg w-8 h-8 shadow-2xl shadow-red-700 border flex items-center justify-center text-white'><FaDeleteLeft />
+                                            </button>
+                                        }
+
+                                    />
+
+
+
+                                </div>
+                            }
                         },
 
                     ]}

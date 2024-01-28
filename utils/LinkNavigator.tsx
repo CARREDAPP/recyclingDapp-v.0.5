@@ -12,7 +12,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 
 export const LINK_GRICOM: HrefLink[] = [
     {
-        href: '/dashboard',
+        href: '/admin/dashboard',
         label: "Dashboard",
         icon: <AiOutlineDashboard className='text-xl' />
     },

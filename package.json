@@ -15,6 +15,7 @@
     "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@types/js-cookie": "^3.0.3",
+    "@types/webrtc": "^0.0.42",
     "antd": "^5.12.8",
     "aos": "^2.3.4",
     "autoprefixer": "10.4.14",

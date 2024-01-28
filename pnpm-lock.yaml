@@ -23,6 +23,9 @@ dependencies:
   '@types/js-cookie':
     specifier: ^3.0.3
     version: 3.0.3
+  '@types/webrtc':
+    specifier: ^0.0.42
+    version: 0.0.42
   antd:
     specifier: ^5.12.8
     version: 5.13.0(react-dom@18.2.0)(react@18.2.0)
@@ -1174,6 +1177,10 @@ packages:
 
   /@types/use-sync-external-store@0.0.3:
     resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
+    dev: false
+
+  /@types/webrtc@0.0.42:
+    resolution: {integrity: sha512-YyrG3yzw/JvZs0q3f9SY+AiJr0FJw1qhBjvoQJEUy07udiyakAax2A87BHpB3qnaxsm2ExCvhyUvjTxdsn+qSw==}
     dev: false
 
   /@typescript-eslint/parser@5.58.0(eslint@8.38.0)(typescript@5.0.4):

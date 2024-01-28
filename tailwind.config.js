@@ -14,6 +14,12 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      backgroundColor: {
+        "primary-dark": "#1e293b",
+        "primary-light": "#fff",
+        "secondary-blue": "#0ea5e9",
+        "primary-color": "#35597B"
+      },
       animation: {
         bounce: 'bounce 10s linear infinite',
         spin: "spin 15s linear infinite",
