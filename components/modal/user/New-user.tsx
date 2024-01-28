@@ -1,4 +1,6 @@
 import { showModal } from '@/components/redux/show-modal/slice.showmodal'
+import { useAppSelector } from '@/components/redux/store'
+import { postuser } from '@/components/redux/user/user.slice'
 import useAppDispatch from '@/hook/use-dispatch'
 import { Button, Form, Input, Modal } from 'antd'
 import React from 'react'
@@ -7,6 +9,18 @@ import React from 'react'
 function NewUser() {
     const { dispatch } = useAppDispatch()
     const [form] = Form.useForm();
+    const { status_post } = useAppSelector(state => state.createUser)
+
+    const onFinish = (e: any) => {
+        const payload = {
+            fullname: e.fullname,
+            password: e.password,
+            username: e.username,
+            form
+        }
+        dispatch(postuser(payload));
+    }
+
     return (
         <Modal
             centered
@@ -16,6 +30,7 @@ function NewUser() {
             onCancel={() => dispatch(showModal('closed'))} >
             <Form
                 form={form}
+                onFinish={onFinish}
                 layout='vertical'
             >
                 <Form.Item
@@ -32,15 +47,15 @@ function NewUser() {
                 </Form.Item>
                 <Form.Item
                     style={{ marginBottom: '6px', backgroundColor: 'transparent' }}
-                    label={'Username'}
+                    label={'Email'}
                     name={'username'}
                     rules={[
                         {
                             required: true,
-                            message: "Please enter your username",
+                            message: "Please enter your email",
                         },
                     ]}>
-                    <Input size='middle' type='email' placeholder='Enter your username' />
+                    <Input size='middle' type='email' placeholder='Enter your email' />
                 </Form.Item>
                 <Form.Item
                     style={{ marginBottom: '6px', backgroundColor: 'transparent' }}
@@ -88,7 +103,7 @@ function NewUser() {
 
                 <div className='flex items-center w-full justify-end'>
                     <Form.Item style={{ marginTop: '10px' }}>
-                        <Button loading={false} size='large' style={{ backgroundColor: '#006064' }} type="primary" htmlType='submit' >
+                        <Button loading={status_post.isLoading} size='large' style={{ backgroundColor: '#006064' }} type="primary" htmlType='submit' >
                             Save
                         </Button>
                     </Form.Item>

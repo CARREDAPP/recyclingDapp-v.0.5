@@ -1,13 +1,23 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useAppDispatch from '@/hook/use-dispatch';
+import useUser from '@/hook/use-user';
 import { LINK_SETTINGS } from '@/utils/linkNavigator';
-import { Input, Table } from 'antd';
+import { Input, List, Table } from 'antd';
 import React, { useState } from 'react'
+import { formatDistanceToNow } from 'date-fns';
+import { fr } from 'date-fns/locale';
+import Image from 'next/image';
+import { FaUnlock, FaLock } from "react-icons/fa";
+import PopConfirm from '@/components/modal/pop-confirm/pop-confirm';
+import { blockuser, deleteuser } from '@/components/redux/user/user.slice';
 
 function Users() {
     const [filter, setfilter] = useState<string | undefined>('');
+    const [open, setOpen] = useState(false);
+    const [currentId, setCurrentId] = useState('');
     const { dispatch } = useAppDispatch()
+    const { GET_USER, status, status_delete, status_block } = useUser();
 
     return (
         <main>
@@ -25,146 +35,63 @@ function Users() {
                     />
                 </div>
             </div>
-
             <div className='flex-grow bg-white dark:bg-primary-dark'>
-                <Table
-                    loading={false}
+                <List
+                    dataSource={GET_USER?.data}
+                    pagination={{ defaultPageSize: 15, hideOnSinglePage: true }}
                     bordered={false}
-                    size="small"
-                    showHeader={true}
-                    sticky={true}
-                    pagination={{ hideOnSinglePage: true, defaultPageSize: 25 }}
-                    columns={[
-                        {
-                            title: "N°",
-                            dataIndex: "id",
-                            key: "id",
-                            ellipsis: true,
-                            align: "center",
-                            filterMultiple: true,
-                            responsive: ['lg'],
-                            width: "5%",
-                            // render: (_, data) => <span className="text-[13px]">{data?.id}</span>
+                    grid={{
+                        gutter: 16,
+                        xs: 1,
+                        sm: 2,
+                        md: 4,
+                        lg: 4,
+                        xl: 6,
+                        xxl: 4,
+                    }}
+                    itemLayout="vertical"
+                    size="default"
+                    renderItem={(items) => {
+                        return <List.Item className='w-full rounded'>
+                            <section className='h-20 border border-gray-100 dark:border-gray-600 flex p-2 scale-95 hover:scale-100 duration-500 space-x-2 items-center justify-between rounded'>
+                                <div className='flex items-center space-x-2'>
+                                    <div className='rounded w-14 h-14'>
+                                        <Image className='bg-cover rounded' width={900} height={900} alt='' src={'/images/avatar.jpg'} />
+                                    </div>
+                                    <div className='flex flex-col justify-center'>
+                                        <span className='text-black dark:text-white font-bold text-[16px] align-text-bottom'>{items.fullname.toUpperCase()}</span>
+                                        <span className='text-gray-600 dark:text-gray-200 text-[16px]'>{items.username.toLowerCase()}</span>
+                                        <div className='flex items-center  space-x-2 justify-between'>
+                                            <h1 className='text-[12px] text-gray-400 '>{formatDistanceToNow(new Date(items?.createdAt!), { addSuffix: true, locale: fr })}</h1>
+                                            <h1 className='text-[12px] text-red-400'>{formatDistanceToNow(new Date(items?.updatedAt!), { addSuffix: true, locale: fr })}</h1>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        },
-                        {
-                            title: "Désignation",
-                            dataIndex: "designation",
-                            key: "designation",
-                            width: "30%",
-                            ellipsis: true,
-                            // filteredValue: [filter!],
-                            // onFilter: (v: any, r) => {
-                            //     return (r.designation?.toLowerCase()?.includes(v?.toLowerCase()))
-                            // },
+                                <PopConfirm
+                                    okButtonProps={{ loading: status_block.isLoading, style: { backgroundColor: "#ef4444" } }}
+                                    onCancel={() => setOpen(false)}
+                                    open={(items.id === currentId) ? open : false}
+                                    onConfirm={() => dispatch(blockuser(items))}
+                                    placement='right'
+                                    title='Notifications'
+                                    description={`${items.is_actve ? "Would you like to block this user?" : "Would you like to unblock this user?"}`}
+                                    children={
+                                        <button onClick={() => {
+                                            setCurrentId(items.id!)
+                                            setOpen(prev => !prev)
 
-                        },
-                        {
-                            title: "Catégories",
-                            dataIndex: "categories",
-                            key: "categories",
-                            width: "15%",
-                            ellipsis: true,
-                            responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data?.categoryproduit?.designation}</span>
-                        },
-                        {
-                            title: "Forme",
-                            dataIndex: "forme",
-                            key: "forme",
-                            width: "10%",
-                            ellipsis: true,
-                            responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data.forme}</span>
-                        },
-                        {
-                            title: "Qte alerte",
-                            dataIndex: "qte",
-                            key: "qte",
-                            width: "8%",
-                            ellipsis: true,
-                            responsive: ['lg'],
-                            // render: (_, data) => {
-                            //     const value = data.stocks.map(i => i.qteDepot);
-                            //     let alerte = data.qteAlerte >= value[0]
-                            //     return <Tag color={`${alerte ? `red` : "success"}`} className="h-3 w-3 rounded-full"></Tag>
-                            // }
-                        },
-                        {
-                            title: "Prix gros",
-                            dataIndex: "pugros",
-                            key: "pugros",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <span className="text-[13px]">{data.pugros}</span>
-                        },
-                        {
-                            title: "Prix détail",
-                            dataIndex: "pudetail",
-                            key: "pudetail",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <span className="text-[13px]">{data.pudetail}</span>
-                        },
-                        {
-                            title: "is-Expire",
-                            dataIndex: "createdAt",
-                            key: "createdAt",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <Tag color="red" icon={<BiImageAdd />} className="text-[14px] flex items-center justify-center space-x-1 cursor-pointer w-24">Parcourir</Tag>
-                        },
+                                        }} className={`${items.is_actve ? 'bg-[#006064]' : 'bg-[#8b2f18]'} text-white p-0.5 rounded flex items-center px-2 space-x-2`}>
+                                            {items.is_actve ? <FaUnlock /> : <FaLock />}
+                                            {items.is_actve ? <span>Block</span> : <span>Unblock</span>}
+                                        </button>
 
-                        {
-                            title: "createdAt",
-                            dataIndex: "createdAt",
-                            key: "createdAt",
-                            width: "10%",
-                            ellipsis: true,
-                            responsive: ['lg'],
-                            // render: (_, data) => <span className="text-[13px]">{data.createdAt.slice(0, 10)}</span>
-                        },
-                        {
-                            title: "",
-                            dataIndex: "createdAt",
-                            key: "createdAt",
-                            width: "10%",
-                            ellipsis: true,
-                            // render: (_, data) => <Tag color="red" icon={<BiImageAdd />} className="text-[14px] flex items-center justify-center space-x-1 cursor-pointer w-24">Parcourir</Tag>
-                        },
+                                    }
+                                // Would you like to unblock this user?
+                                />
 
-                    ]}
-                    components={{
-                        header: {
-                            cell: ({
-                                children,
-                                ...rest
-                            }: {
-                                children: React.ReactNode;
-                            }) => (
-                                <td
-                                    {...rest}
-                                    className='p-2  !text-black  dark:!text-slate-300 !bg-white   font-bold dark:!bg-primary-dark'
-                                >
-                                    {children}
-                                </td>
-                            ),
-                        },
-                        body: {
-                            cell: ({
-                                children,
-                                ...rest
-                            }: {
-                                children: React.ReactNode;
-                            }) => (
-                                <td
-                                    {...rest}
-                                    className='text-black dark:!text-slate-300 dark:!bg-primary-dark'
-                                >
-                                    {children}
-                                </td>
-                            ),
-                        },
+                            </section>
+                        </List.Item>
                     }}
                 />
             </div>

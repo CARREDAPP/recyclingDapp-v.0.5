@@ -1,6 +1,6 @@
-import { IDELETEUser, IGETUser, IPOSTUser, IUPDATEUser, IUser } from "@/types"
+import { IBLOCKUser, IDELETEUser, IGETUser, IPOSTUser, IUPDATEUser, IUser } from "@/types"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteUser, getUser, postUser, updateUser } from "./use.service";
+import { blocUser, deleteUser, getUser, postUser, updateUser } from "./use.service";
 import { STATUS } from "@/components/helpers/helpers";
 
 const initialState: {
@@ -9,7 +9,13 @@ const initialState: {
     UPDATE_USER: IUPDATEUser | null,
     DATA_USER: IUser | null,
     DELETE_USER: IDELETEUser | null,
+    BLOCK_USER: IBLOCKUser | null,
     status_post: {
+        isLoading: boolean,
+        isSuccess: boolean,
+        isError: boolean,
+    },
+    status_block: {
         isLoading: boolean,
         isSuccess: boolean,
         isError: boolean,
@@ -36,7 +42,13 @@ const initialState: {
     GET_USER: null,
     POST_USER: null,
     UPDATE_USER: null,
+    BLOCK_USER: null,
     status_post: {
+        isLoading: false,
+        isSuccess: false,
+        isError: false,
+    },
+    status_block: {
         isLoading: false,
         isSuccess: false,
         isError: false,
@@ -62,8 +74,9 @@ const postuser = createAsyncThunk('user/add', postUser);
 const getuser = createAsyncThunk('user/all', getUser);
 const updateuser = createAsyncThunk('user/update', updateUser);
 const deleteuser = createAsyncThunk('user/delete', deleteUser);
+const blockuser = createAsyncThunk('user/block', blocUser);
 
-const productsService = createSlice({
+const userService = createSlice({
     initialState,
     name: 'user',
     reducers: {
@@ -144,12 +157,33 @@ const productsService = createSlice({
         }).addCase(deleteuser.rejected, (state, { payload }) => {
             state.status_delete = STATUS.ERROR;
             state.message = payload as string
+        }).addCase(blockuser.pending, (state) => {
+            state.status_block = STATUS.PENDING;
+        }).addCase(blockuser.fulfilled, (state, { payload }) => {
+            state.status_block = STATUS.SUCCESS;
+            const index = state.GET_USER?.data.findIndex(item => item?.id === payload?.data.id);
+            if (index !== -1) {
+                state.GET_USER = {
+                    ...state.GET_USER!,
+                    msg: '',
+                    data: [
+                        ...state.GET_USER?.data.slice(0, index)!,
+                        payload.data,
+                        ...state.GET_USER?.data.slice(index! + 1)!
+                    ]
+                };
+            }
+            state.message = payload.msg;
+
+        }).addCase(blockuser.rejected, (state, { payload }) => {
+            state.status_block = STATUS.ERROR;
+            state.message = payload as string
         });
     },
 });
 
 
-export default productsService.reducer;
+export default userService.reducer;
 export const {
     setDeleteUserIsError,
     setDeleteUserIsSuccess,
@@ -159,6 +193,6 @@ export const {
     setPostUserIsSuccess,
     setUserUpdate
 
-} = productsService.actions;
-export { postuser, getuser, updateuser, deleteuser }
+} = userService.actions;
+export { postuser, getuser, updateuser, deleteuser, blockuser }
 

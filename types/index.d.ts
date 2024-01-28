@@ -6,9 +6,9 @@ export interface HrefLink {
 }
 export interface IGlobal {
     id?: string;
-    createdAt?: Date | string;
-    updatedAt?: Date | string;
-    deletedAt?: Date | string;
+    createdAt?: string
+    updatedAt?: string
+    deletedAt?: string
 }
 
 export interface ICategory extends IGlobal {
@@ -70,22 +70,27 @@ export interface IUser extends IGlobal {
     is_actve?: string
 }
 
-export interface IPOSTUser extends IGlobal {
+export interface IPOSTUser {
     data: IUser,
     msg: string
 }
 
-export interface IUPDATEUser extends IGlobal {
+export interface IUPDATEUser {
+    data: IUser,
+    msg: string
+}
+export interface IBLOCKUser {
     data: IUser,
     msg: string
 }
 
-export interface IGETUser extends IGlobal {
+
+export interface IGETUser {
     data: IUser[],
     msg: string
 }
 
-export interface IDELETEUser extends IGlobal {
+export interface IDELETEUser {
     data: IUser,
     msg: string
 }

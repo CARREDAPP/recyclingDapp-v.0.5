@@ -4,7 +4,7 @@ import { RootState } from "../store";
 import { BASE_URL } from "@/components/helpers/helpers.api";
 import UseRestartField from "@/hook/Use-restartField";
 import { returnApiError } from "@/components/helpers/api.error.handler";
-import { IGETUser, IPOSTUser, IUPDATEUser } from "@/types";
+import { IBLOCKUser, IGETUser, IPOSTUser, IUPDATEUser } from "@/types";
 
 export const getUser: AsyncThunkPayloadCreator<IGETUser> = async (_, thunkAPI) => {
     try {
@@ -59,6 +59,26 @@ export const updateUser: AsyncThunkPayloadCreator<IUPDATEUser, any> = async (pay
             }
         });
         UseRestartField(form);
+        return response.data;
+    } catch (error) {
+        return axios.isAxiosError(error)
+            ? thunkAPI.rejectWithValue(returnApiError(error))
+            : thunkAPI.rejectWithValue('Auth error')
+
+    }
+}
+
+export const blocUser: AsyncThunkPayloadCreator<IBLOCKUser, any> = async (payload, thunkAPI) => {
+    try {
+        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { form, ...body } = payload;
+        const response: AxiosResponse<IBLOCKUser> = await axios.patch(`${BASE_URL}user/block?id=${payload.id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                // Authorization: `Bearer ${profile?.token}`
+
+            }
+        });
         return response.data;
     } catch (error) {
         return axios.isAxiosError(error)
