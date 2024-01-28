@@ -1,7 +1,8 @@
-import { IBLOCKUser, IDELETEUser, IGETUser, IPOSTUser, IUPDATEUser, IUser } from "@/types"
+import { IAuthUser, IBLOCKUser, IDELETEUser, IGETUser, IPOSTUser, IUPDATEUser, IUser } from "@/types"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { blocUser, deleteUser, getUser, postUser, updateUser } from "./use.service";
+import { authUser, blocUser, deleteUser, getUser, postUser, updateUser } from "./use.service";
 import { STATUS } from "@/components/helpers/helpers";
+import { getCookies, removeCookies, setCookies } from "@/utils/Cookies-server";
 
 const initialState: {
     POST_USER: IPOSTUser | null,
@@ -10,6 +11,7 @@ const initialState: {
     DATA_USER: IUser | null,
     DELETE_USER: IDELETEUser | null,
     BLOCK_USER: IBLOCKUser | null,
+    PROFILE: IAuthUser | null,
     status_post: {
         isLoading: boolean,
         isSuccess: boolean,
@@ -31,6 +33,11 @@ const initialState: {
         isError: boolean,
     },
     status: {
+        isLoading: boolean,
+        isSuccess: boolean,
+        isError: boolean,
+    },
+    status_auth: {
         isLoading: boolean,
         isSuccess: boolean,
         isError: boolean,
@@ -43,6 +50,10 @@ const initialState: {
     POST_USER: null,
     UPDATE_USER: null,
     BLOCK_USER: null,
+    PROFILE: typeof window !== 'undefined'
+        ? getCookies('session-user') && JSON.parse(getCookies('session-user')!)
+        : null,
+
     status_post: {
         isLoading: false,
         isSuccess: false,
@@ -68,6 +79,11 @@ const initialState: {
         isSuccess: false,
         isError: false,
     },
+    status_auth: {
+        isLoading: false,
+        isSuccess: false,
+        isError: false,
+    },
     message: null
 }
 const postuser = createAsyncThunk('user/add', postUser);
@@ -75,10 +91,11 @@ const getuser = createAsyncThunk('user/all', getUser);
 const updateuser = createAsyncThunk('user/update', updateUser);
 const deleteuser = createAsyncThunk('user/delete', deleteUser);
 const blockuser = createAsyncThunk('user/block', blocUser);
+const authuser = createAsyncThunk('user/auth/login', authUser);
 
 const userService = createSlice({
     initialState,
-    name: 'user',
+    name: 'user/user-service',
     reducers: {
         setUserUpdate: (state, { payload }) => {
             state.DATA_USER = payload;
@@ -100,7 +117,15 @@ const userService = createSlice({
         },
         setDeleteUserIsError: (state, { payload }) => {
             state.status_delete.isError = payload;
-        }
+        },
+        logoutUser: (state) => {
+            removeCookies('session-user');
+            state.PROFILE = null;
+            window.location.replace('/');
+        },
+        loadUserData: (state, { payload }: { payload: typeof initialState.PROFILE }) => {
+            state.PROFILE = payload;
+        },
     },
     extraReducers(builder) {
         builder.addCase(postuser.pending, (state) => {
@@ -178,6 +203,15 @@ const userService = createSlice({
         }).addCase(blockuser.rejected, (state, { payload }) => {
             state.status_block = STATUS.ERROR;
             state.message = payload as string
+        }).addCase(authuser.pending, (state) => {
+            state.status_auth = STATUS.PENDING;
+        }).addCase(authuser.fulfilled, (state, { payload }) => {
+            state.PROFILE = payload;
+            setCookies('session-user', JSON?.stringify(payload));
+            state.status_auth = STATUS.SUCCESS;
+        }).addCase(authuser.rejected, (state, { payload }) => {
+            state.status_auth = STATUS.ERROR;
+            state.message = payload as string
         });
     },
 });
@@ -191,8 +225,10 @@ export const {
     setPatchUserIsSuccess,
     setPostUserIsError,
     setPostUserIsSuccess,
-    setUserUpdate
+    setUserUpdate,
+    loadUserData,
+    logoutUser
 
 } = userService.actions;
-export { postuser, getuser, updateuser, deleteuser, blockuser }
+export { postuser, getuser, updateuser, deleteuser, blockuser, authuser }
 

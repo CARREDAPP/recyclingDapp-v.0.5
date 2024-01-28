@@ -1,7 +1,8 @@
+import useAuth from "@/hook/use-auth";
 import Image from "next/image";
 
 const NotConnected = () => {
-    // const { logout } = useAuth();
+    const { logout } = useAuth();
     return (
         <main className='w-full h-full flex flex-col justify-center items-center bg-white dark:bg-primary-dark'>
             <div >
@@ -23,7 +24,7 @@ const NotConnected = () => {
             <div className='text-center'>
                 <p className='py-3 text-lg'>You have been disconnected</p>
                 <button
-                    onClick={() => null}
+                    onClick={logout}
                     className='bg-red-600 p-4 py-2 text-sm w-full text-white rounded-md flex gap-2 justify-center items-center scale-95 hover:scale-100 duration-500'>
                     Please reconnect
                 </button>

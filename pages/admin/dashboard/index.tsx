@@ -1,10 +1,13 @@
+import MainAppLayout from '@/components/layouts/MainAppLayout'
 import React from 'react'
 
 function Dashboard() {
     return (
-        <main>
+        <MainAppLayout>
+            <main>
+            </main>
+        </MainAppLayout>
 
-        </main>
     )
 }
 

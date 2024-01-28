@@ -4,7 +4,7 @@ import { RootState } from "../store";
 import { BASE_URL } from "@/components/helpers/helpers.api";
 import UseRestartField from "@/hook/Use-restartField";
 import { returnApiError } from "@/components/helpers/api.error.handler";
-import { IBLOCKUser, IGETUser, IPOSTUser, IUPDATEUser } from "@/types";
+import { IAuthUser, IBLOCKUser, IGETUser, IPOSTUser, IUPDATEUser } from "@/types";
 
 export const getUser: AsyncThunkPayloadCreator<IGETUser> = async (_, thunkAPI) => {
     try {
@@ -96,6 +96,22 @@ export const deleteUser: AsyncThunkPayloadCreator<any, any> = async (payload, th
                 'Content-Type': 'application/json',
                 // Authorization: `Bearer ${profile?.token}`
 
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return axios.isAxiosError(error)
+            ? thunkAPI.rejectWithValue(returnApiError(error))
+            : thunkAPI.rejectWithValue('Auth error')
+
+    }
+}
+
+export const authUser: AsyncThunkPayloadCreator<IAuthUser, any> = async (payload, thunkAPI) => {
+    try {
+        const response: AxiosResponse<IAuthUser> = await axios.post(`${BASE_URL}user/auth`, payload, {
+            headers: {
+                "Content-Type": "application/json",
             }
         });
         return response.data;

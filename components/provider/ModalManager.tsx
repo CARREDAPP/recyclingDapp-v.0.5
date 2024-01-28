@@ -5,6 +5,7 @@ import NewProducts from '../modal/products/New-products';
 import NewUser from '../modal/user/New-user';
 import UpdateCategory from '../modal/category/Update-category';
 import UpdateProducts from '../modal/products/Update-products';
+import UpdateUser from '../modal/user/Update-user';
 
 function ModalManager() {
     const { is_open, is_open_sub } = useAppSelector(state => state.createShownModal);
@@ -13,6 +14,7 @@ function ModalManager() {
             {is_open === 'show-category' && <NewCategory />}
             {is_open === 'show-product' && <NewProducts />}
             {is_open === 'show-user' && <NewUser />}
+            {is_open === 'show-user-update' && <UpdateUser />}
             {is_open === 'show-update-category' && <UpdateCategory />}
             {is_open === 'show-update-products' && <UpdateProducts />}
 

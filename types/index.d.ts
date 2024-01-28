@@ -67,7 +67,8 @@ export interface IUser extends IGlobal {
     fullname: string,
     username: string,
     password: string,
-    is_actve?: string
+    is_actve?: boolean,
+    entrepriseId?: string,
 }
 
 export interface IPOSTUser {
@@ -93,4 +94,9 @@ export interface IGETUser {
 export interface IDELETEUser {
     data: IUser,
     msg: string
+}
+export interface IAuthUser {
+    data: IUser,
+    msg: string,
+    token: string
 }

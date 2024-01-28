@@ -1,10 +1,12 @@
 'use client';
+import useAuth from '@/hook/use-auth';
 import Header from './Header';
 import Sidebar from './Siderbar';
+import NotConnected from '../global/NotConnection';
 
 const AdminPanel = ({ children }: { children: React.ReactNode }) => {
-    // const { isLogin } = useAuth();
-    // const localSession = JSON.parse(localStorage.getItem('user-session')!);
+    const { user } = useAuth();
+
     return (
         <main className='h-screen'>
             <Sidebar />

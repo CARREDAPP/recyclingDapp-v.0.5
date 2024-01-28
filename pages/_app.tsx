@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app'
 import MainAppLayout from '@/components/layouts/MainAppLayout';
 import Container from './Container';
 import Toastmessage from '@/components/provider/Toastmessage';
-import Layout from '@/components/layouts/layout';
+import Layout from '@/components/layouts/Layout';
 
 
 
