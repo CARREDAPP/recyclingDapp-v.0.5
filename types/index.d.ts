@@ -101,3 +101,38 @@ export interface IAuthUser {
     msg: string,
     token: string
 }
+
+export interface IEntreprise extends IGlobal {
+    companyName: string,
+    digitalAdress: string,
+    phone: string,
+    mailCompany: string,
+    nationalite: string,
+    province: string,
+    ville: string,
+    avenue: string,
+    codePostale: string,
+    imageUrl?: string,
+    longitute: string,
+    latitude: string,
+}
+
+export interface IGETEntreprise {
+    data: IEntreprise[],
+    msg: string
+}
+
+export interface IPOSTEntreprise {
+    data: IEntreprise,
+    msg: string
+}
+
+export interface IDELETEntreprise {
+    data: IEntreprise,
+    msg: string
+}
+
+export interface IUPDATEEntreprise {
+    data: IEntreprise,
+    msg: string
+}

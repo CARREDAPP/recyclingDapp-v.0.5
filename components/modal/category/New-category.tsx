@@ -59,7 +59,7 @@ function NewCategory() {
                 <div className='flex items-center w-full justify-end'>
                     <Form.Item style={{ marginTop: '10px' }}>
                         <Button loading={false} size='middle' style={{ backgroundColor: '#006064' }} type="primary" htmlType='submit' >
-                            Enregistrer
+                            save
                         </Button>
                     </Form.Item>
                 </div>
