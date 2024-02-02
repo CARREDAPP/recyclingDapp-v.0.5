@@ -3,14 +3,16 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import SliceShowModal from './show-modal/slice.showmodal'
 import categoryService from './category/category.slices'
 import productsService from './products/products.slices'
-import userService from './user/user.slice'
+import userService from './user/user.slice';
+import supplySlices from './supply/supply.slice'
 
 const store = configureStore({
     reducer: {
         createShownModal: SliceShowModal,
         createCategory: categoryService,
         createProducts: productsService,
-        createUser: userService
+        createUser: userService,
+        createSupply: supplySlices,
     },
 });
 
