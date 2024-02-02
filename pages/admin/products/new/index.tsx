@@ -126,7 +126,7 @@ function NowProducts() {
                                         }} className='bg-[#006064] p-1 rounded-lg w-8 h-8 shadow-2xl shadow-slate-700 border flex items-center justify-center text-white'><GrUpdate />
                                         </button>
                                         <button onClick={() => {
-
+                                            dispatch(showModal('show-add-gallery'))
                                         }} className='bg-gray-200 text-black p-1 rounded-lg w-8 h-8 shadow-2xl shadow-slate-700 border flex items-center justify-center'><IoCloudUploadOutline />
                                         </button>
 

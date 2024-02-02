@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { deleteCategory, getCategorie, postCategorie, updateCategory } from "./category.service"
 import { STATUS } from "@/components/helpers/helpers";
+import { ICategory, IDELETECategory, IGETCategory, IPOSTCategory, IUPDATECategory } from "@/types";
 
 
 const initialState: {

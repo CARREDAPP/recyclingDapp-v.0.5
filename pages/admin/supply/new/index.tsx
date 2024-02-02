@@ -1,21 +1,24 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
 import MainAppLayout from '@/components/layouts/MainAppLayout';
+import { showModal } from '@/components/redux/show-modal/slice.showmodal';
+import useAppDispatch from '@/hook/use-dispatch';
 import { LINK_SUPPLY } from '@/utils/linkNavigator';
 import { Input, Table } from 'antd';
 import React, { useState } from 'react'
 
 function Supply() {
     const [filter, setfilter] = useState<string | undefined>('');
+    const { dispatch } = useAppDispatch();
 
     return (
         <MainAppLayout >
-            <main>
+            <main className='flex flex-col h-full'>
                 <div>
                     <div className="w-full justify-between  box lg:flex items-center">
                         <PageBreadcrumb breadcrumbItems={LINK_SUPPLY} />
                     </div>
                     <div className='py-1 w-full justify-between  box lg:flex items-center '>
-                        <button style={{ backgroundColor: "#006064" }} className='text-white h-8 rounded font-medium px-2' onClick={() => null}>New supply</button>
+                        <button style={{ backgroundColor: "#006064" }} className='text-white h-8 rounded font-medium px-2' onClick={() => dispatch(showModal('show-add-supply'))}>New supply</button>
                         <Input.Search
                             onChange={(e) => setfilter(e.target.value)}
                             onSearch={(v) => setfilter(v)}
@@ -25,7 +28,7 @@ function Supply() {
                     </div>
                 </div>
 
-                <div className='flex-grow bg-white dark:bg-primary-dark'>
+                <div className='flex-grow bg-white dark:bg-primary-dark '>
                     <Table
                         loading={false}
                         bordered={false}

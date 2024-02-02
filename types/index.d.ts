@@ -136,3 +136,11 @@ export interface IUPDATEEntreprise {
     data: IEntreprise,
     msg: string
 }
+
+export interface IDetailsEntre extends IGlobal {
+    price: string,
+    quantity: number,
+    enteteEntreId?: string,
+    productId?: string,
+    products?: IProducts
+}
