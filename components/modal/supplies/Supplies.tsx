@@ -17,7 +17,7 @@ function Supplies() {
     const [form] = Form.useForm();
     const { dispatch } = useAppDispatch();
     const { GET_PRODUCT, status } = useProducts();
-    const { PANIER_ENTREE } = useAppSelector(state => state.createSupply);
+    const { PANIER_ENTREE, is_status_post } = useAppSelector(state => state.createSupply);
     const handleSelectChange = (value: any, option: any) => {
         setSelectedLabel(option.label);
     };
@@ -44,7 +44,6 @@ function Supplies() {
                 New supply
             </p>}
         >
-
             <main>
                 <Form
                     form={form}
@@ -167,7 +166,7 @@ function Supplies() {
                         ]}
                     />
                     <div className='flex items-center w-full space-x-4 py-2'>
-                        <Button onClick={() => dispatch(postSupplyDetails(PANIER_ENTREE))} loading={false} size='middle' style={{ backgroundColor: '#006064' }} type="primary"  >
+                        <Button onClick={() => dispatch(postSupplyDetails(PANIER_ENTREE))} loading={is_status_post.isLoading} size='middle' style={{ backgroundColor: '#006064' }} type="primary"  >
                             Apply
                         </Button>
 

@@ -1,9 +1,10 @@
 import { returnApiError } from "@/components/helpers/api.error.handler";
 import { BASE_URL } from "@/components/helpers/helpers.api";
-import { IPOSTEntreprise } from "@/types";
+import { IGETEntreprise, IPOSTEntreprise } from "@/types";
 import { AsyncThunkPayloadCreator } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import UseRestartField from "@/hook/Use-restartField";
+import { RootState } from "../store";
 
 export const postCompany: AsyncThunkPayloadCreator<IPOSTEntreprise, any> = async (payload, thunkAPI) => {
     try {
@@ -14,6 +15,24 @@ export const postCompany: AsyncThunkPayloadCreator<IPOSTEntreprise, any> = async
             }
         })
         UseRestartField(form);
+        return response.data;
+    } catch (error) {
+        return axios.isAxiosError(error)
+            ? thunkAPI.rejectWithValue(returnApiError(error))
+            : thunkAPI.rejectWithValue('Auth error')
+
+    }
+}
+
+export const getCompany: AsyncThunkPayloadCreator<IGETEntreprise> = async (payload, thunkAPI) => {
+    try {
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
+        const response: AxiosResponse<IGETEntreprise> = await axios.get(`${BASE_URL}/entreprise`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${PROFILE?.token}`
+            }
+        })
         return response.data;
     } catch (error) {
         return axios.isAxiosError(error)

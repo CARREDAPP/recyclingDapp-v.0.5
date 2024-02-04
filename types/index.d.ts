@@ -8,7 +8,7 @@ export interface IGlobal {
     id?: string;
     createdAt?: string
     updatedAt?: string
-    deletedAt?: string
+    deletedAt?: string | null;
 }
 
 export interface ICategory extends IGlobal {
@@ -37,14 +37,17 @@ export interface IDELETECategory {
 
 
 export interface IProducts extends IGlobal {
-    designation: string,
-    description: string,
-    price: number,
-    units: string,
-    qteAlerte: number,
-    entrepriseId?: string,
-    categoryId?: string,
-    category?: ICategory,
+
+    designation: string;
+    description: string;
+    price: number;
+    units: string;
+    qteAlerte: number;
+    entrepriseId: string;
+    categoryId: string;
+    category?: ICategory;
+    stocks?: IStock[];
+
 }
 export interface IPOSTProducts {
     data: IProducts,
@@ -101,7 +104,10 @@ export interface IAuthUser {
     msg: string,
     token: string
 }
-
+export interface IStock extends IGlobal {
+    quantity?: number,
+    productId?: string,
+}
 export interface IEntreprise extends IGlobal {
     companyName: string,
     digitalAdress: string,
@@ -119,7 +125,7 @@ export interface IEntreprise extends IGlobal {
 
 
 export interface IGETEntreprise {
-    data: IEntreprise[],
+    data: IEntreprise,
     msg: string
 }
 
@@ -146,7 +152,31 @@ export interface IDetailsEntre extends IGlobal {
     products?: IProducts
 }
 
+
+
 export interface IPostDetailsEntre extends IGlobal {
     data: IDetailsEntre,
     msg: string
 }
+
+
+
+
+export interface IGetSupply {
+    msg: string,
+    data: SupplyDetail[]
+}
+
+interface Supply extends IGlobal {
+    dateEntre: string;
+    detailsEntres: SupplyDetail[];
+}
+
+interface SupplyDetail extends IGlobal {
+    price: number;
+    quantity: number;
+    enteteEntreId: string;
+    productId: string;
+    product: IProducts;
+}
+

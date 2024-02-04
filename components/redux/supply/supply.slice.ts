@@ -1,11 +1,17 @@
-import { IDetailsEntre } from "@/types";
+import { IDetailsEntre, IGetSupply } from "@/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { postSupply } from "./supply.service";
+import { getSupply, postSupply } from "./supply.service";
 import { STATUS } from "@/components/helpers/helpers";
 
 const initialState: {
     PANIER_ENTREE: IDetailsEntre[],
+    GET_SUPPLY: IGetSupply | null,
     is_status_post: {
+        isLoading: boolean,
+        isSuccess: boolean,
+        isError: boolean,
+    },
+    is_status: {
         isLoading: boolean,
         isSuccess: boolean,
         isError: boolean,
@@ -14,7 +20,13 @@ const initialState: {
 
 } = {
     PANIER_ENTREE: [],
+    GET_SUPPLY: null,
     is_status_post: {
+        isLoading: false,
+        isSuccess: false,
+        isError: false,
+    },
+    is_status: {
         isLoading: false,
         isSuccess: false,
         isError: false,
@@ -22,6 +34,9 @@ const initialState: {
     message: null
 }
 const postSupplyDetails = createAsyncThunk('supply/add', postSupply);
+const getSupplyDetails = createAsyncThunk('supply/get', getSupply);
+
+
 const supplySlices = createSlice({
     initialState,
     name: 'supply',
@@ -101,6 +116,15 @@ const supplySlices = createSlice({
         }).addCase(postSupplyDetails.rejected, (state, { payload }) => {
             state.is_status_post = STATUS.ERROR;
             state.message = payload as string;
+        }).addCase(getSupplyDetails.pending, (state) => {
+            state.is_status = STATUS.PENDING;
+        }).addCase(getSupplyDetails.fulfilled, (state, { payload }) => {
+            state.is_status = STATUS.SUCCESS;
+            state.message = payload.msg;
+            state.GET_SUPPLY = payload
+        }).addCase(getSupplyDetails.rejected, (state, { payload }) => {
+            state.is_status = STATUS.ERROR;
+            state.message = payload as string;
         })
     },
 });
@@ -108,4 +132,4 @@ const supplySlices = createSlice({
 
 export default supplySlices.reducer;
 export const { addPanier, cleanAll, decrement, increment, remove, updateCart, setErrorSupply, setSuccesSupply } = supplySlices.actions;
-export { postSupplyDetails };
+export { postSupplyDetails, getSupplyDetails };
