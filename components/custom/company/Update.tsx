@@ -3,8 +3,8 @@ import React from 'react'
 
 function Update() {
     return (
-
-        <div className='bg-white col-span-3 rounded  h-full  shadow-md mx-9 p-4 -translate-y-24'>
+        // bg - white shadow - md h - full p - 4 flex justify - start items - center - translate - y - 20 mx - 9 flex - col rounded
+        <div className='bg-white col-span-3 rounded  h-full  shadow-md mx-9 p-4 -translate-y-24 rounded'>
             <Form
                 layout='vertical'
 

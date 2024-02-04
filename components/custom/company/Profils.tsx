@@ -6,63 +6,63 @@ import { BiPhone } from 'react-icons/bi';
 import { GoLocation } from "react-icons/go";
 import { FaWallet } from "react-icons/fa6";
 import { BsPinMapFill } from "react-icons/bs";
+import { IGETEntreprise } from '@/types';
 
-function Profils() {
+function Profils(profils: IGETEntreprise) {
+    console.log(profils)
     return (
-        <main>
-            <div className='bg-white shadow-md h-full p-4 flex justify-start items-center -translate-y-20 mx-9 flex-col rounded'>
-                {/* <div className='bg-yellow-900 shadow-2xl w-32 h-32 rounded-full'>
+        <main className='bg-white shadow-md h-full p-4 flex justify-start items-center -translate-y-24 mx-9 flex-col rounded'>
+            {/* <div className='bg-yellow-900 shadow-2xl w-32 h-32 rounded-full'>
                             </div> */}
-                <BuildTitle
-                    icon={<FiHome className='text-white' />}
-                    label='Company name'
-                    size={22}
-                    title='Uni-market'
-                    className='bg-orange-700 opacity-80 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
-                />
-                <BuildTitle
-                    icon={<LuMailPlus className='text-white' />}
-                    label='Mail address'
-                    size={22}
-                    title='gentilakili98@gmail.com'
-                    className='bg-sky-700 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
-                />
-                <BuildTitle
-                    icon={<BiPhone className='text-white' />}
-                    label='Phone number'
-                    size={22}
-                    title='+243 977748166'
-                    className='bg-sky-900 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
-                />
-                <BuildTitle
-                    icon={<GoLocation className='text-white' />}
-                    label='Location'
-                    size={22}
-                    title='Democratic Republic of the Congo'
-                    className='bg-teal-700 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
-                />
-                <BuildTitle
-                    icon={<BsPinMapFill className='text-white' />}
-                    label='Longitude'
-                    size={22}
-                    title='10477'
-                    className='bg-orange-950 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
-                />
-                <BuildTitle
-                    icon={<BsPinMapFill className='text-white' />}
-                    label='Latitude'
-                    size={22}
-                    title='10477'
-                    className='bg-lime-800 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
-                />
-                <BuildTitle
-                    icon={<FaWallet className='text-white flex items-center justify-center' />}
-                    label='Digital adress'
-                    size={22}
-                    title='10477'
-                    className='bg-red-900 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
-                />
-            </div>
+            <BuildTitle
+                icon={<FiHome className='text-white' />}
+                label='Company name'
+                size={22}
+                title={profils?.data?.companyName}
+                className='bg-orange-700 opacity-80 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
+            />
+            <BuildTitle
+                icon={<LuMailPlus className='text-white' />}
+                label='Mail address'
+                size={22}
+                title={profils?.data?.mailCompany}
+                className='bg-sky-700 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
+            />
+            <BuildTitle
+                icon={<BiPhone className='text-white' />}
+                label='Phone number'
+                size={22}
+                title={profils?.data?.phone}
+                className='bg-sky-900 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
+            />
+            <BuildTitle
+                icon={<GoLocation className='text-white' />}
+                label='Location'
+                size={22}
+                title={profils?.data?.nationalite}
+                className='bg-teal-700 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
+            />
+            <BuildTitle
+                icon={<BsPinMapFill className='text-white' />}
+                label='Longitude'
+                size={22}
+                title={profils?.data?.longitute}
+                className='bg-orange-950 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
+            />
+            <BuildTitle
+                icon={<BsPinMapFill className='text-white' />}
+                label='Latitude'
+                size={22}
+                title={profils?.data?.latitude}
+                className='bg-lime-800 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
+            />
+            <BuildTitle
+                icon={<FaWallet className='text-white flex items-center justify-center' />}
+                label='Digital adress'
+                size={22}
+                title={profils?.data?.digitalAdress}
+                className='bg-red-900 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
+            />
         </main>
     )
 }

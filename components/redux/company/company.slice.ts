@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { STATUS } from "@/components/helpers/helpers";
 import { ICategory, IDELETECategory, IEntreprise, IGETCategory, IGETEntreprise, IPOSTCategory, IUPDATECategory, IUPDATEEntreprise } from "@/types";
-import { postCompany } from "./company.service";
+import { getCompany, postCompany } from "./company.service";
 
 
 const initialState: {
@@ -60,6 +60,7 @@ const initialState: {
     message: null
 }
 const postEntreprises = createAsyncThunk('company/add', postCompany);
+const getEntreprises = createAsyncThunk('company/get', getCompany);
 
 const companySlice = createSlice({
     initialState,
@@ -81,11 +82,19 @@ const companySlice = createSlice({
         }).addCase(postEntreprises.rejected, (state, { payload }) => {
             state.status_post = STATUS.ERROR;
             state.message = payload as string;
+        }).addCase(getEntreprises.pending, (state) => {
+            state.status = STATUS.PENDING;
+        }).addCase(getEntreprises.fulfilled, (state, { payload }) => {
+            state.status = STATUS.SUCCESS;
+            state.GET_COMPANY = payload
+        }).addCase(getEntreprises.rejected, (state, { payload }) => {
+            state.status = STATUS.ERROR;
+            state.message = payload as string;
         })
     },
 })
 
 
 export default companySlice.reducer;
-export { postEntreprises }
+export { postEntreprises, getEntreprises }
 export const { setCompanyIsError, setCompanyIsSuccess } = companySlice.actions

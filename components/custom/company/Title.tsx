@@ -23,7 +23,7 @@ function BuildTitle({ className, icon, label, size, title }: ITitle) {
             </div>
             <div className='flex flex-col justify-start'>
                 <span className='text-gray-500'>{label}</span>
-                <span className='text-[15px] font-bold overflow-hidden'>{title}</span>
+                <span className='font-bold overflow-hidden text-gray-700'>{title}</span>
             </div>
         </div>
     )
