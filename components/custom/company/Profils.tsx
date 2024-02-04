@@ -7,13 +7,14 @@ import { GoLocation } from "react-icons/go";
 import { FaWallet } from "react-icons/fa6";
 import { BsPinMapFill } from "react-icons/bs";
 import { IGETEntreprise } from '@/types';
+import { subString } from '@/utils/convertir';
+import { SiWalletconnect } from "react-icons/si";
+
 
 function Profils(profils: IGETEntreprise) {
-    console.log(profils)
     return (
         <main className='bg-white shadow-md h-full p-4 flex justify-start items-center -translate-y-24 mx-9 flex-col rounded'>
-            {/* <div className='bg-yellow-900 shadow-2xl w-32 h-32 rounded-full'>
-                            </div> */}
+
             <BuildTitle
                 icon={<FiHome className='text-white' />}
                 label='Company name'
@@ -57,10 +58,10 @@ function Profils(profils: IGETEntreprise) {
                 className='bg-lime-800 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
             />
             <BuildTitle
-                icon={<FaWallet className='text-white flex items-center justify-center' />}
+                icon={<SiWalletconnect className='text-white flex items-center justify-center' />}
                 label='Digital adress'
                 size={22}
-                title={profils?.data?.digitalAdress}
+                title={subString(profils?.data?.digitalAdress)}
                 className='bg-red-900 p-1 flex items-center justify-center flex-col  rounded-md text-xl'
             />
         </main>

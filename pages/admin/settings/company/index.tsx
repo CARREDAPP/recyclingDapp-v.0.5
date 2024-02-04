@@ -6,7 +6,7 @@ import IconShadowWidget from '@/components/helpers/showicon';
 import MainAppLayout from '@/components/layouts/MainAppLayout';
 import useCompany from '@/hook/use-company';
 import { LINK_SETTINGS } from '@/utils/linkNavigator';
-import { Button, Form, Input, Table } from 'antd';
+import { Button, Form, Input, Table, Spin } from 'antd';
 import React, { useState } from 'react'
 import { PiCameraDuotone } from "react-icons/pi";
 
@@ -31,7 +31,7 @@ function Company() {
                     </button>
                     <div className='w-full grid grid-cols-4 bg-transparent absolute bottom-0  bg-white '>
                         <Profils data={GET_COMPANY?.data!} msg='' />
-                        <Update />
+                        <Update data={GET_COMPANY?.data!} msg='' />
                     </div>
                 </div>
             </main>

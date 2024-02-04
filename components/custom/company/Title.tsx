@@ -10,7 +10,7 @@ interface ITitle {
 }
 function BuildTitle({ className, icon, label, size, title }: ITitle) {
     return (
-        <div className='flex items-center space-x-2 w-full p-2'>
+        <div className='flex items-center space-x-2 w-full py-3'>
             <div className={className}>
                 <IconShadowWidget
                     shadowColor=''
@@ -22,8 +22,8 @@ function BuildTitle({ className, icon, label, size, title }: ITitle) {
                 />
             </div>
             <div className='flex flex-col justify-start'>
-                <span className='text-gray-500'>{label}</span>
-                <span className='font-bold overflow-hidden text-gray-700'>{title}</span>
+                <span className='text-gray-500 font-normal text-[14px]'>{label}</span>
+                <span className='font-normal overflow-hidden text-gray-700'>{title}</span>
             </div>
         </div>
     )

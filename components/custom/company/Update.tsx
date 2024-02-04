@@ -1,10 +1,11 @@
+import { IGETEntreprise } from '@/types'
 import { Button, Form, Input } from 'antd'
 import React from 'react'
 
-function Update() {
+function Update({ data }: IGETEntreprise) {
     return (
         // bg - white shadow - md h - full p - 4 flex justify - start items - center - translate - y - 20 mx - 9 flex - col rounded
-        <div className='bg-white col-span-3 rounded  h-full  shadow-md mx-9 p-4 -translate-y-24 rounded'>
+        <div className='bg-white col-span-3 rounded  h-full  shadow-md mx-9 p-4 -translate-y-24'>
             <Form
                 layout='vertical'
 
@@ -15,6 +16,7 @@ function Update() {
                         style={{ marginBottom: '6px' }}
                         label={'Company Name'}
                         name={'companyName'}
+                        initialValue={data?.companyName}
                         rules={[
                             {
                                 required: true,
@@ -24,6 +26,7 @@ function Update() {
                         <Input size='middle' placeholder="Enter the Company Name" />
                     </Form.Item>
                     <Form.Item
+                        initialValue={data?.digitalAdress}
                         className='w-full'
                         style={{ marginBottom: '6px' }}
                         label={'Digital Adress'}
@@ -39,6 +42,7 @@ function Update() {
                 </div>
                 <div className='flex items-center space-x-4'>
                     <Form.Item
+                        initialValue={data?.phone}
                         className='w-full'
                         style={{ marginBottom: '6px' }}
                         label={'Phone'}
@@ -57,6 +61,7 @@ function Update() {
                         <Input size='middle' placeholder="Enter the phone" />
                     </Form.Item>
                     <Form.Item
+                        initialValue={data?.mailCompany}
                         className='w-full'
                         style={{ marginBottom: '6px' }}
                         label={'Company Email'}
@@ -78,6 +83,7 @@ function Update() {
 
                 <div className='flex items-center space-x-4'>
                     <Form.Item
+                        initialValue={data?.nationalite}
                         className='w-full'
                         style={{ marginBottom: '6px' }}
                         label={'Location'}
@@ -94,6 +100,7 @@ function Update() {
                         className='w-full'
                         style={{ marginBottom: '6px' }}
                         label={'Province'}
+                        initialValue={data?.province}
                         name={'province'}
                         rules={[
                             {
@@ -107,6 +114,7 @@ function Update() {
                 <div className='flex items-center space-x-4'>
                     <Form.Item
                         className='w-full'
+                        initialValue={data?.ville}
                         style={{ marginBottom: '6px' }}
                         label={'City'}
                         name={'ville'}
@@ -119,6 +127,7 @@ function Update() {
                         <Input size='middle' placeholder="Enter the city" />
                     </Form.Item>
                     <Form.Item
+                        initialValue={data?.avenue}
                         className='w-full'
                         style={{ marginBottom: '6px' }}
                         label={'Street'}
@@ -133,6 +142,7 @@ function Update() {
                     </Form.Item>
                 </div>
                 <Form.Item
+                    initialValue={data?.codePostale}
                     style={{ marginBottom: '6px' }}
                     label={'ZIP code'}
                     name={'codePostale'}
