@@ -1,10 +1,10 @@
 export const returnApiError = (error: any) => {
-    if (Array.isArray(error?.response?.data?.message))
-        return error?.response?.data.message[0];
+    if (Array.isArray(error?.response?.data?.msg))
+        return error?.response?.data.msg[0];
     if (
         typeof error?.response?.data === 'object' &&
-        !Array.isArray(error?.response?.data?.message)
+        !Array.isArray(error?.response?.data?.msg)
     )
-        return error.response?.data.message;
-    return error.message;
+        return error.response?.data.msg;
+    return error.msg;
 };

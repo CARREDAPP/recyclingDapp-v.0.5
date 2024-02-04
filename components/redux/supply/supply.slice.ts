@@ -1,5 +1,7 @@
 import { IDetailsEntre } from "@/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { postSupply } from "./supply.service";
+import { STATUS } from "@/components/helpers/helpers";
 
 const initialState: {
     PANIER_ENTREE: IDetailsEntre[],
@@ -19,9 +21,9 @@ const initialState: {
     },
     message: null
 }
-
+const postSupplyDetails = createAsyncThunk('supply/add', postSupply);
 const supplySlices = createSlice({
-    initialState: initialState,
+    initialState,
     name: 'supply',
     reducers: {
         addPanier: (state, { payload }) => {
@@ -39,7 +41,8 @@ const supplySlices = createSlice({
                 const index = state?.PANIER_ENTREE?.findIndex((item) => item?.products?.id === payload?.id);
                 state?.PANIER_ENTREE?.splice(index!, 1, {
                     ...state?.PANIER_ENTREE[index!],
-                    quantity: state?.PANIER_ENTREE[index!]?.quantity! + 1,
+                    quantity: payload.quantity,
+                    price: payload.price,
                 });
             }
         },
@@ -81,9 +84,19 @@ const supplySlices = createSlice({
             }
         }
 
-    }
+    },
+    extraReducers(builder) {
+        builder.addCase(postSupplyDetails.pending, (state) => {
+            state.is_status_post = STATUS.PENDING;
+        }).addCase(postSupplyDetails.fulfilled, (state, { payload }) => {
+            state.is_status_post = STATUS.SUCCESS;
+        }).addCase(postSupplyDetails.rejected, (state, { payload }) => {
+            state.is_status_post = STATUS.ERROR;
+        })
+    },
 });
 
 
 export default supplySlices.reducer;
 export const { addPanier, cleanAll, decrement, increment, remove, updateCart } = supplySlices.actions;
+export { postSupplyDetails };

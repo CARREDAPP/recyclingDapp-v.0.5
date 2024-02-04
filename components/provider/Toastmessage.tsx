@@ -3,6 +3,8 @@ import { message as Tost } from 'antd'
 import { useAppSelector } from '../redux/store';
 import * as category from '../redux/category/category.slices';
 import * as products from '../redux/products/products.slices';
+import * as company from '../redux/company/company.slice';
+import * as login from '../redux/user/user.slice'
 import useAppDispatch from '@/hook/use-dispatch';
 
 
@@ -11,6 +13,8 @@ function Toastmessage() {
     const { dispatch } = useAppDispatch();
     const { status_delete: is_delete_category, status_post: is_post_category, status_update: is_update_category, message: message_category } = useAppSelector(state => state.createCategory)
     const { status_delete: is_delete_products, status_post: is_post_products, status_update: is_update_products, message: message_products } = useAppSelector(state => state.createProducts)
+    const { status_post: is_post_company, message: message_compny } = useAppSelector(state => state.createCompany);
+    const { status_auth: is_status_login, message: message_user } = useAppSelector(state => state.createUser);
 
 
     useEffect(() => {
@@ -48,7 +52,16 @@ function Toastmessage() {
 
 
 
-
+    useEffect(() => {
+        if (is_status_login.isSuccess) {
+            message_user && tost.success(message_user);
+            dispatch(login.setUserIsSuccess(false));
+        }
+        if (is_status_login.isError) {
+            message_user && tost.error(message_user);
+            dispatch(login.setUserIsError(false));
+        }
+    }, [, dispatch, is_status_login]);
 
     useEffect(() => {
         if (is_post_products.isSuccess) {
@@ -81,7 +94,20 @@ function Toastmessage() {
             message_products && tost.error(message_products);
             dispatch(products.setPatchProductsIsError(false));
         }
-    }, [, dispatch, is_update_category]);
+    }, [, dispatch, is_update_products]);
+
+
+
+    useEffect(() => {
+        if (is_post_company.isSuccess) {
+            message_products && tost.success(message_compny);
+            dispatch(company.setCompanyIsSuccess(false));
+        }
+        if (is_post_company.isError) {
+            message_compny && tost.error(message_compny);
+            dispatch(company.setCompanyIsError(false));
+        }
+    }, [, dispatch, is_post_company]);
 
 
     return (

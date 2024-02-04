@@ -8,11 +8,11 @@ import { IGETProducts, IPOSTProducts, IUDATEProducts } from "@/types";
 
 export const getProducts: AsyncThunkPayloadCreator<IGETProducts> = async (_, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const response: AxiosResponse<IGETProducts> = await axios.get(`${BASE_URL}products`, {
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         })
@@ -27,13 +27,13 @@ export const getProducts: AsyncThunkPayloadCreator<IGETProducts> = async (_, thu
 
 export const postProducts: AsyncThunkPayloadCreator<IPOSTProducts, any> = async (payload, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const { form, ...body } = payload;
         console.log(payload)
         const response: AxiosResponse<IPOSTProducts> = await axios.post(`${BASE_URL}products/add`, body, {
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         });
@@ -49,12 +49,12 @@ export const postProducts: AsyncThunkPayloadCreator<IPOSTProducts, any> = async 
 
 export const updateProducts: AsyncThunkPayloadCreator<IUDATEProducts, any> = async (payload, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const { form, ...body } = payload;
         const response: AxiosResponse<IUDATEProducts> = await axios.patch(`${BASE_URL}products/update?id=${payload.id}`, body, {
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         });
@@ -70,11 +70,11 @@ export const updateProducts: AsyncThunkPayloadCreator<IUDATEProducts, any> = asy
 
 export const deleteProducts: AsyncThunkPayloadCreator<any, any> = async (payload, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const response: AxiosResponse<any> = await axios.delete(`${BASE_URL}products/delete?id=${payload.id}`, {
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         });

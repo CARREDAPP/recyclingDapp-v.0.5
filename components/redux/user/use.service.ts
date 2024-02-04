@@ -8,11 +8,11 @@ import { IAuthUser, IBLOCKUser, IGETUser, IPOSTUser, IUPDATEUser } from "@/types
 
 export const getUser: AsyncThunkPayloadCreator<IGETUser> = async (_, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const response: AxiosResponse<IGETUser> = await axios.get(`${BASE_URL}user`, {
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         })
@@ -27,13 +27,12 @@ export const getUser: AsyncThunkPayloadCreator<IGETUser> = async (_, thunkAPI) =
 
 export const postUser: AsyncThunkPayloadCreator<IPOSTUser, any> = async (payload, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const { form, ...body } = payload;
-        console.log(payload)
         const response: AxiosResponse<IPOSTUser> = await axios.post(`${BASE_URL}user/add`, body, {
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         });
@@ -49,12 +48,12 @@ export const postUser: AsyncThunkPayloadCreator<IPOSTUser, any> = async (payload
 
 export const updateUser: AsyncThunkPayloadCreator<IUPDATEUser, any> = async (payload, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const { form, ...body } = payload;
         const response: AxiosResponse<IUPDATEUser> = await axios.patch(`${BASE_URL}user/update?id=${payload.id}`, body, {
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         });
@@ -70,12 +69,12 @@ export const updateUser: AsyncThunkPayloadCreator<IUPDATEUser, any> = async (pay
 
 export const blocUser: AsyncThunkPayloadCreator<IBLOCKUser, any> = async (payload, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const { form, ...body } = payload;
         const response: AxiosResponse<IBLOCKUser> = await axios.patch(`${BASE_URL}user/block?id=${payload.id}`, {
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         });
@@ -90,11 +89,11 @@ export const blocUser: AsyncThunkPayloadCreator<IBLOCKUser, any> = async (payloa
 
 export const deleteUser: AsyncThunkPayloadCreator<any, any> = async (payload, thunkAPI) => {
     try {
-        // const { auth: { profile } } = thunkAPI.getState() as RootState;
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         const response: AxiosResponse<any> = await axios.delete(`${BASE_URL}user/delete?id=${payload.id}`, {
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Bearer ${profile?.token}`
+                Authorization: `Bearer ${PROFILE?.token}`
 
             }
         });

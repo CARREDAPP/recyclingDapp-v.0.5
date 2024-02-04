@@ -6,15 +6,14 @@ interface IPopconfirm {
     open: boolean,
     onConfirm?: () => void,
     onCancel?: () => void,
-    children?: React.ReactNode
-    description?: string,
-    title?: string
+    description?: React.ReactNode,
+    title?: React.ReactNode
     placement?: placement,
     okButtonProps: ButtonProps
 
 }
 
-function PopConfirm({ onCancel, onConfirm, children, open, title, description, placement, okButtonProps }: IPopconfirm) {
+function PopConfirm({ onCancel, onConfirm, children, open, title, description, placement, okButtonProps }: React.PropsWithChildren<IPopconfirm>) {
     return (
         <Popconfirm
             placement={placement}

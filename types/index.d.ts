@@ -117,6 +117,7 @@ export interface IEntreprise extends IGlobal {
     latitude: string,
 }
 
+
 export interface IGETEntreprise {
     data: IEntreprise[],
     msg: string

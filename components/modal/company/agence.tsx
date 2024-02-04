@@ -1,30 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Drawer, Form, Input, Select } from 'antd'
 import useAppDispatch from '@/hook/use-dispatch'
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import { countries } from '@/types/nationalite';
-const { Option } = Select;
+import { postEntreprises } from '@/components/redux/company/company.slice';
+import { useAppSelector } from '@/components/redux/store';
+import Image from 'next/image';
 
 function Agence() {
     const { dispatch } = useAppDispatch();
+    const [form] = Form.useForm();
+    const { status_post } = useAppSelector(state => state.createCompany);
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+    const [error, setError] = useState(null);
 
-    const onFinish = () => {
+    useEffect(() => {
+        const getLocation = () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position): any => {
+                        setLatitude(position.coords.latitude as any);
+                        setLongitude(position.coords.longitude as any);
+                    },
+
+                );
+            }
+        };
+        getLocation();
+    }, []);
+
+    const onFinish = (e: any) => {
         const payload = {
-
+            companyName: e.companyName,
+            digitalAdress: e.digitalAdress,
+            phone: e.phone,
+            mailCompany: e.mailCompany,
+            nationalite: e.nationalite,
+            province: e.province,
+            ville: e.ville,
+            avenue: e.avenue,
+            codePostale: e.codePostale,
+            longitute: longitude,
+            latitude: latitude,
+            form
         }
+        dispatch(postEntreprises(payload));
     }
-    // companyName: string,
-    // digitalAdress: string,
-    // phone: string,
-    // mailCompany: string,
-    // nationalite: string,
-    // province: string,
-    // ville: string,
-    // avenue: string,
-    // codePostale: string,
-    // imageUrl ?: string,
-    // longitute: string,
-    // latitude: string,
+
     return (
         <Drawer
             width={750}
@@ -37,6 +60,7 @@ function Agence() {
             <Form
                 layout='vertical'
                 onFinish={onFinish}
+                form={form}
             >
                 <Form.Item
                     style={{ marginBottom: '6px' }}
@@ -82,7 +106,7 @@ function Agence() {
                 <Form.Item
                     style={{ marginBottom: '6px' }}
                     label={'Company Email'}
-                    name={'companyEmail'}
+                    name={'mailCompany'}
                     rules={[
                         {
                             required: true,
@@ -99,7 +123,7 @@ function Agence() {
                 <Form.Item
                     style={{ marginBottom: '6px' }}
                     label={'Nationality'}
-                    name={'nationality'}
+                    name={'nationalite'}
                     rules={[
                         {
                             required: true,
@@ -177,12 +201,13 @@ function Agence() {
                     <Input size='middle' placeholder="Enter the ZIP code" />
                 </Form.Item>
 
-                <div className='flex items-center space-x-4'>
+                {/* <div className='flex items-center space-x-4'>
                     <Form.Item
                         className='w-full'
                         style={{ marginBottom: '6px' }}
                         label={'Longitude'}
                         name={'longitute'}
+                        initialValue={longitude}
                         rules={[
                             {
                                 required: true,
@@ -192,6 +217,7 @@ function Agence() {
                         <Input size='middle' placeholder="Enter the longitude" />
                     </Form.Item>
                     <Form.Item
+                        initialValue={latitude}
                         className='w-full'
                         style={{ marginBottom: '6px' }}
                         label={'Latitude'}
@@ -204,10 +230,10 @@ function Agence() {
                         ]}>
                         <Input size='middle' placeholder="Enter the latitude" />
                     </Form.Item>
-                </div>
+                </div> */}
                 <div className='flex items-center w-full justify-end'>
                     <Form.Item style={{ marginTop: '10px' }}>
-                        <Button htmlType='submit' loading={false} style={{ backgroundColor: '#006064', color: '#ffff' }} >
+                        <Button htmlType='submit' loading={status_post.isLoading} style={{ backgroundColor: '#006064', color: '#ffff' }} >
                             Save
                         </Button>
                     </Form.Item>

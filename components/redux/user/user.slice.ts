@@ -126,6 +126,13 @@ const userService = createSlice({
         loadUserData: (state, { payload }: { payload: typeof initialState.PROFILE }) => {
             state.PROFILE = payload;
         },
+        setUserIsSuccess: (state, { payload }) => {
+            state.status_post.isSuccess = payload;
+        },
+        setUserIsError: (state, { payload }) => {
+            state.status_post.isError = payload;
+        },
+
     },
     extraReducers(builder) {
         builder.addCase(postuser.pending, (state) => {
@@ -227,7 +234,9 @@ export const {
     setPostUserIsSuccess,
     setUserUpdate,
     loadUserData,
-    logoutUser
+    logoutUser,
+    setUserIsError,
+    setUserIsSuccess,
 
 } = userService.actions;
 export { postuser, getuser, updateuser, deleteuser, blockuser, authuser }
