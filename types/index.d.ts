@@ -145,3 +145,8 @@ export interface IDetailsEntre extends IGlobal {
     productId?: string,
     products?: IProducts
 }
+
+export interface IPostDetailsEntre extends IGlobal {
+    data: IDetailsEntre,
+    msg: string
+}

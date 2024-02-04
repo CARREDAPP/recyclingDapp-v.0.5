@@ -216,6 +216,7 @@ const userService = createSlice({
             state.PROFILE = payload;
             setCookies('session-user', JSON?.stringify(payload));
             state.status_auth = STATUS.SUCCESS;
+            state.message = payload.msg;
         }).addCase(authuser.rejected, (state, { payload }) => {
             state.status_auth = STATUS.ERROR;
             state.message = payload as string

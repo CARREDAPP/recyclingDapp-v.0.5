@@ -5,6 +5,7 @@ import * as category from '../redux/category/category.slices';
 import * as products from '../redux/products/products.slices';
 import * as company from '../redux/company/company.slice';
 import * as login from '../redux/user/user.slice'
+import * as supply from '../redux/supply/supply.slice'
 import useAppDispatch from '@/hook/use-dispatch';
 
 
@@ -15,8 +16,24 @@ function Toastmessage() {
     const { status_delete: is_delete_products, status_post: is_post_products, status_update: is_update_products, message: message_products } = useAppSelector(state => state.createProducts)
     const { status_post: is_post_company, message: message_compny } = useAppSelector(state => state.createCompany);
     const { status_auth: is_status_login, message: message_user } = useAppSelector(state => state.createUser);
+    const { is_status_post: is_status_supply, message: message_supply } = useAppSelector(state => state.createSupply);
+
+    useEffect(() => {
+        if (is_status_supply.isSuccess) {
+            message_supply && tost.success(message_supply);
+            dispatch(supply.setSuccesSupply(false));
+            dispatch(supply.cleanAll());
+        }
+        if (is_status_supply.isError) {
+            message_supply && tost.error(message_supply);
+            dispatch(supply.setErrorSupply(false));
+        }
+    }, [dispatch, is_status_supply]);
 
 
+
+
+    /////////////////////CATEGORY TOSTE HERE //////////////////
     useEffect(() => {
         if (is_post_category.isSuccess) {
             message_category && tost.success(message_category);

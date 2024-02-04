@@ -82,7 +82,14 @@ const supplySlices = createSlice({
                     price: payload.value.price
                 };
             }
-        }
+        },
+        setSuccesSupply: (state, { payload }) => {
+            state.is_status_post.isSuccess = payload;
+        },
+        setErrorSupply: (state, { payload }) => {
+            state.is_status_post.isError = payload;
+        },
+
 
     },
     extraReducers(builder) {
@@ -90,13 +97,15 @@ const supplySlices = createSlice({
             state.is_status_post = STATUS.PENDING;
         }).addCase(postSupplyDetails.fulfilled, (state, { payload }) => {
             state.is_status_post = STATUS.SUCCESS;
+            state.message = payload.msg;
         }).addCase(postSupplyDetails.rejected, (state, { payload }) => {
             state.is_status_post = STATUS.ERROR;
+            state.message = payload as string;
         })
     },
 });
 
 
 export default supplySlices.reducer;
-export const { addPanier, cleanAll, decrement, increment, remove, updateCart } = supplySlices.actions;
+export const { addPanier, cleanAll, decrement, increment, remove, updateCart, setErrorSupply, setSuccesSupply } = supplySlices.actions;
 export { postSupplyDetails };

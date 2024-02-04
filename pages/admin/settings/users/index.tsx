@@ -60,17 +60,17 @@ function Users() {
                         size="default"
                         renderItem={(items) => {
                             return <List.Item className='w-full rounded'>
-                                <section className='h-20 border border-gray-200 dark:border-gray-600 flex p-2 scale-95 hover:scale-100 duration-500 space-x-2 items-center justify-between rounded'>
+                                <section className=' border border-gray-200 dark:border-gray-600 flex p-2 scale-95 hover:scale-100 duration-500 space-x-2 items-center justify-between rounded'>
                                     <div className='flex items-center space-x-2'>
                                         <div className='rounded w-14 h-14'>
                                             <Image className='bg-cover rounded' width={900} height={900} alt='' src={'/images/avatar.jpg'} />
                                         </div>
                                         <div className='flex flex-col justify-center'>
                                             <span className='text-black dark:text-white font-bold text-[14px] align-text-bottom'>{items.fullname.toUpperCase()}</span>
-                                            <span className='text-gray-600 dark:text-gray-200 text-[16px]'>{items.username.toLowerCase()}</span>
+                                            <span className='text-gray-600 dark:text-gray-200 text-[15px]'>{items.username.toLowerCase()}</span>
                                             <div className='flex items-center  space-x-2 justify-between'>
-                                                <h1 className='text-[12px] text-gray-400 '>{formatDistanceToNow(new Date(items?.createdAt!), { addSuffix: true, locale: fr })}</h1>
-                                                <h1 className='text-[12px] text-red-400'>{formatDistanceToNow(new Date(items?.updatedAt!), { addSuffix: true, locale: fr })}</h1>
+                                                <h1 className='text-[12px] text-gray-400 overflow-hidden '>{formatDistanceToNow(new Date(items?.createdAt!), { addSuffix: true, locale: fr })}</h1>
+                                                <h1 className='text-[12px] text-red-400 overflow-hidden'>{formatDistanceToNow(new Date(items?.updatedAt!), { addSuffix: true, locale: fr })}</h1>
                                             </div>
                                         </div>
                                     </div>

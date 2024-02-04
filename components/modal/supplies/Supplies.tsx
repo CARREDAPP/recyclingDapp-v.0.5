@@ -30,6 +30,7 @@ function Supplies() {
             price: e.price,
         }
         dispatch(addPanier(payload));
+        form.resetFields();
     }
     return (
         <Modal
