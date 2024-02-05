@@ -1,3 +1,5 @@
+import { Asset, AssetExtended, BrowserWallet } from "@meshsdk/core";
+
 
 export interface HrefLink {
     href: string;
@@ -180,3 +182,34 @@ interface SupplyDetail extends IGlobal {
     product: IProducts;
 }
 
+
+interface IInfoWallet {
+    wallet: BrowserWallet;
+    address: string[];
+    network: number;
+    balance: Asset[];
+    asset: AssetExtended[],
+    connected?: boolean,
+    walletConnected: IWallet;
+}
+
+interface IWallet {
+    icon: string;
+    name: string;
+    version: string;
+}
+
+interface IItemsCard extends IDataSystem {
+    designation: string;
+    description: string;
+    price: number;
+    quanty: number;
+    units: string;
+    CategoryId?: number;
+    EntrepriseId?: number;
+    Images?: IImage;
+    Category?: ICategory;
+    Entreprise?: IEntreprise;
+    Ventes?: IVentes;
+    qte?: number
+}

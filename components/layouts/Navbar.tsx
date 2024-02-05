@@ -1,12 +1,21 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { HSThemeAppearance } from '@/utils/theme';
-import { Theme } from '@/types/types';
+import { Theme, subString } from '@/types/types';
 import { ThemeToggle } from '../global/ThemeToggle';
 import { UserProfileButton } from '../global/UserProfileButton';
+import useAuth from '@/hook/use-auth';
+import { FiLoader } from 'react-icons/fi';
+import { AiOutlineShopping } from 'react-icons/ai';
+import { useAppSelector } from '../redux/store';
+import { showModal } from '../redux/show-modal/slice.showmodal';
+import useAppDispatch from '@/hook/use-dispatch';
+import { FaWallet } from "react-icons/fa6";
 
 const Navbar = () => {
     const [theme, setTheme] = useState<Theme>('default');
+    const { infoWallet, status } = useAppSelector(state => state.createWallet);
+    const { dispatch } = useAppDispatch();
     useEffect(() => {
         HSThemeAppearance.init();
         const handleAppearanceChange = (e: any) => {
@@ -105,8 +114,29 @@ const Navbar = () => {
                 </div>
                 <div className='hidden sm:block'></div>
                 <div className='flex flex-row items-center justify-end gap-2'>
-                    <ThemeToggle />
-                    <UserProfileButton />
+
+                    {/* <UserProfileButton /> */}
+                    <div className='flex flex-row items-center justify-end gap-2'>
+                        <button
+                            onClick={() => dispatch(showModal('show-wallet'))}
+                            className={`${status.isSuccess ? "text-slate-500" : "bg-teal-500 text-white"
+                                } group-hover:text-white px-10 border border-slate-300 h-10 rounded-full w-max flex items-center justify-center cursor-pointer   space-x-2 dark:text-white`}
+                        >
+                            {status.isLoading ? (
+                                <FiLoader className="text-xl animate-spin duration-100" />
+                            ) : (
+                                <FaWallet className="text-2xl" />
+                            )}
+                            <span className="group-hover:font-bold text-center text-[14px] font-medium">
+                                {" "}
+                                {status?.isSuccess ? subString(infoWallet?.address[0]) : "Conntect"}
+                            </span>
+                        </button>
+                        <ThemeToggle />
+                        {/* <UserProfileButton /> */}
+
+                    </div>
+
                 </div>
             </div>
         </nav>

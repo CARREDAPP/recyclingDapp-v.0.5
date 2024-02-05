@@ -24,10 +24,10 @@ function Company() {
                     <div className='py-2 w-full justify-between  box lg:flex items-center '>
                     </div>
                 </div>
-                <div className='flex-grow  dark:bg-primary-dark relative bg-[#006064] py-3'>
+                <div className='flex-grow  bg-cover bg dark:bg-primary-dark relative bg-[#006064] py-3' style={{ backgroundImage: "url('/img/logo.png')" }}>
                     <button className='absolute right-2 p-3 border flex items-center text-white space-x-2 rounded-lg font-bold'>
                         <PiCameraDuotone className='text-xl' />
-                        <span>Change covor</span>
+                        <span>Change cover</span>
                     </button>
                     <div className='w-full grid grid-cols-4 bg-transparent absolute bottom-0  bg-white '>
                         <Profils data={GET_COMPANY?.data!} msg='' />

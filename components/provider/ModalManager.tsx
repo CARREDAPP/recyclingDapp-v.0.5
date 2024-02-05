@@ -9,6 +9,7 @@ import UpdateUser from '../modal/user/Update-user';
 import Agence from '@/components/modal/company/agence';
 import Gallery from '../modal/gallery/Gallery';
 import Supplies from '../modal/supplies/Supplies';
+import ModalWallet from '../modal/wallet';
 
 function ModalManager() {
     const { is_open, is_open_sub } = useAppSelector(state => state.createShownModal);
@@ -23,6 +24,7 @@ function ModalManager() {
             {is_open === 'show-show-agence' && <Agence />}
             {is_open === 'show-add-gallery' && <Gallery />}
             {is_open === 'show-add-supply' && <Supplies />}
+            {is_open === 'show-wallet' && <ModalWallet />}
 
         </div>
     )
