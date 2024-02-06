@@ -11,6 +11,8 @@ import { useAppSelector } from '../redux/store';
 import { showModal } from '../redux/show-modal/slice.showmodal';
 import useAppDispatch from '@/hook/use-dispatch';
 import { FaWallet } from "react-icons/fa6";
+import useLockFunds from '@/hook/use-lockFunds';
+import useUnlock from '@/hook/use-unlock';
 
 const Navbar = () => {
     const [theme, setTheme] = useState<Theme>('default');
@@ -91,7 +93,7 @@ const Navbar = () => {
                     href='#'
                     aria-label='Brand'
                 >
-                    Care-dAPPs
+                    CarreDApp
                 </Link>
             </div>
             <div className='w-full flex items-center justify-end ml-auto sm:justify-between sm:gap-x-3 sm:order-3'>
@@ -119,7 +121,7 @@ const Navbar = () => {
                     <div className='flex flex-row items-center justify-end gap-2'>
                         <button
                             onClick={() => dispatch(showModal('show-wallet'))}
-                            className={`${status.isSuccess ? "text-slate-500" : "bg-teal-500 text-white"
+                            className={`${status.isSuccess ? "text-slate-500" : "bg-[#006064] text-white"
                                 } group-hover:text-white px-10 border border-slate-300 h-10 rounded-full w-max flex items-center justify-center cursor-pointer   space-x-2 dark:text-white`}
                         >
                             {status.isLoading ? (
@@ -133,6 +135,13 @@ const Navbar = () => {
                             </span>
                         </button>
                         <ThemeToggle />
+                        {/* <button onClick={async () => {
+                            await useLockFunds(infoWallet)
+                        }}>Lock Funds</button>
+
+                        <button onClick={async () => {
+                            await useUnlock(infoWallet)
+                        }}>unLock Funds</button> */}
                         {/* <UserProfileButton /> */}
 
                     </div>

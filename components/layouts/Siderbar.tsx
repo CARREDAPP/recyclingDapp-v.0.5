@@ -95,10 +95,10 @@ const Sidebar = () => {
             className='hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 left-0 bottom-0 z-[60] w-56 bg-white border-r border-transparent pt-7 pb-10 overflow-y-auto scrollbar-y lg:block lg:translate-x-0 lg:right-auto lg:bottom-0 dark:scrollbar-y dark:bg-gray-800'>
             <div className='px-6 mb-8'>
                 <Link
-                    className='flex-none text-xl font-bold text-center text-[#006064] dark:text-white'
+                    className='flex-none text-2xl font-bold text-center text-[#006064] dark:text-white'
                     href='/'
                     aria-label='Brand'>
-                    Care dAPPs
+                    CarreDApp
                 </Link>
             </div>
 

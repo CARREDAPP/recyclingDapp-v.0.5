@@ -183,6 +183,32 @@ interface SupplyDetail extends IGlobal {
 }
 
 
+export interface IGetVentes {
+    msg: string,
+    data: IVentesDetail[]
+}
+
+interface Supply extends IGlobal {
+    dateEntre: string;
+    detailsEntres: SupplyDetail[];
+}
+interface IEnteteVentes extends IGlobal {
+    datesortie?: string,
+    clientId?: string;
+    is_active: boolean
+}
+interface IVentesDetail extends IGlobal {
+    quantity: number,
+    price: number,
+    productId?: string,
+    enteteVenteId?: string
+    enteteVente?: IenteteVentes
+    product: IProducts;
+}
+
+
+
+
 interface IInfoWallet {
     wallet: BrowserWallet;
     address: string[];

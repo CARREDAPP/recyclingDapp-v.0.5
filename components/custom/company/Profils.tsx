@@ -14,7 +14,6 @@ import { SiWalletconnect } from "react-icons/si";
 function Profils(profils: IGETEntreprise) {
     return (
         <main className='bg-white shadow-md h-full p-4 flex justify-start items-center -translate-y-24 mx-9 flex-col rounded'>
-
             <BuildTitle
                 icon={<FiHome className='text-white' />}
                 label='Company name'

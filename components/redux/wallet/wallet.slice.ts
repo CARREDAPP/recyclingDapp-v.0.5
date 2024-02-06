@@ -3,6 +3,7 @@ import { IInfoWallet, IItemsCard, IWallet } from "@/types"
 import { contract, toLovelace } from "@/types/types"
 import { BrowserWallet, Data, Transaction, resolvePaymentKeyHash, resolvePlutusScriptAddress } from "@meshsdk/core"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+
 let wallet: BrowserWallet;
 const initialState: {
     infoWallet: IInfoWallet | undefined,
@@ -83,7 +84,9 @@ const walletAsync = createAsyncThunk<IInfoWallet | any, any>("wallet", async (_:
     } catch (error: any) {
         console.log("=========>", error);
     }
-})
+});
+
+
 
 const ConnectedWalletSlice = createSlice({
     initialState: initialState,

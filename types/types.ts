@@ -1,6 +1,7 @@
 import { returnApiError } from '@/components/helpers/api.error.handler';
 import axios from 'axios';
 import { HTMLAttributes } from 'react';
+import { PlutusScript, resolvePlutusScriptAddress } from '@meshsdk/core';
 
 export type Theme = 'default' | 'auto' | 'dark';
 
@@ -24,13 +25,12 @@ export const contract = {
     script: process.env.NEXT_PUBLIC_SCRIPT
 }
 
-export const fromLovelace = (lovelace: string) => parseInt(lovelace) / 1000000;
+export const fromLovelace = (lovelace: string) => (parseInt(lovelace) / 1000000).toFixed(2) + "  ₳";
 export const fromStr = (str: string) => Buffer.from(str, "utf-8");
 export const toHex = (bytes: any) => Buffer.from(bytes).toString("hex");
 export const subString = (value: any) => value?.substring(0, 9) + "..." + value?.substring(value?.length - 10, value?.length);
 export const toLovelace = (amount: string): string => {
     const lovelaceAmount = parseFloat(amount) * 1000000;
-
     return lovelaceAmount.toString();
 }
 
@@ -39,4 +39,5 @@ export const errorHelpers = (error: any, thunkAPI: any) => {
         ? thunkAPI.rejectWithValue(returnApiError(error))
         : thunkAPI.rejectWithValue('Auth error')
 }
+
 

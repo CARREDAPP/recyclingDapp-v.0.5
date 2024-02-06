@@ -7,6 +7,7 @@ import userService from './user/user.slice';
 import supplySlices from './supply/supply.slice';
 import companySlice from './company/company.slice';
 import ConnectedWalletSlice from './wallet/wallet.slice'
+import saleSlices from './sale/sale.slices'
 
 const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
         createSupply: supplySlices,
         createCompany: companySlice,
         createWallet: ConnectedWalletSlice,
+        createSales: saleSlices
 
     },
 });
