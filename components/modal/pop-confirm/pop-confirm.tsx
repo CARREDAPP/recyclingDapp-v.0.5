@@ -9,7 +9,8 @@ interface IPopconfirm {
     description?: React.ReactNode,
     title?: React.ReactNode
     placement?: placement,
-    okButtonProps: ButtonProps
+    okButtonProps: ButtonProps,
+    children: React.ReactNode
 
 }
 
