@@ -8,7 +8,7 @@ import { RootState } from "../store";
 export const getSale: AsyncThunkPayloadCreator<IGetVentes> = async (payload, thunkAPI) => {
     try {
         const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
-        const response: AxiosResponse<IGetVentes> = await axios.get(`${BASE_URL}sale/`, {
+        const response: AxiosResponse<IGetVentes> = await axios.get(`${BASE_URL}sale`, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${PROFILE?.token}`

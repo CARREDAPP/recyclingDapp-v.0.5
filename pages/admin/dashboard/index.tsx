@@ -6,10 +6,13 @@ import React from 'react'
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
 import { IoWalletOutline } from "react-icons/io5";
 import { FaChartLine } from "react-icons/fa";
-import { Table } from 'antd';
+import { Table, Tag } from 'antd';
+import useSale from '@/hook/use-sale';
+import dayjs from 'dayjs';
 
 function Dashboard() {
     const { infoWallet } = useAppSelector(state => state.createWallet);
+    const { GET_SALE, is_status } = useSale();
     return (
         <MainAppLayout>
             <main className='flex flex-col h-full'>
@@ -18,7 +21,6 @@ function Dashboard() {
                         {/* <PageBreadcrumb breadcrumbItems={ROUTE_ACTION_APP} /> */}
                     </div>
                     <div className='py-1 w-full justify-between  box lg:flex items-center '>
-
                     </div>
                 </div>
                 <div className='flex-grow bg-white dark:bg-primary-dark space-y-4'>
@@ -26,7 +28,7 @@ function Dashboard() {
                         <CardItems
                             icon={<FaChartLine className='text-2xl text-white' />}
                             designation='Available command'
-                            count={100}
+                            count={(GET_SALE?.data.length) ?? 0}
                             categories='Command'
                             pourcentage='%100'
                             className='bg-teal-700 text-xl'
@@ -62,9 +64,9 @@ function Dashboard() {
                     </div>
                     <div className=' p-4'>
                         <Table
-                            // loading={status.isLoading}
+                            loading={is_status.isLoading}
                             bordered={false}
-                            // dataSource={GET_PRODUCT?.data}
+                            dataSource={GET_SALE?.data}
                             size="small"
                             showHeader={true}
                             sticky={true}
@@ -79,6 +81,7 @@ function Dashboard() {
                                     filterMultiple: true,
                                     responsive: ['lg'],
                                     width: 80,
+                                    render: (_, element, index) => index + 1
 
                                 },
                                 {
@@ -86,6 +89,7 @@ function Dashboard() {
                                     dataIndex: "designation",
                                     key: "designation",
                                     ellipsis: true,
+                                    render: (_, element, index) => element.product.designation
                                     // filteredValue: [filter!],
                                     // onFilter: (v: any, r) => {
                                     //     return (r.designation?.toLowerCase()?.includes(v?.toLowerCase()))
@@ -98,6 +102,7 @@ function Dashboard() {
                                     key: "categories",
                                     ellipsis: true,
                                     responsive: ['lg'],
+                                    render: (_, element, index) => element.product.category?.designation
                                 },
                                 {
                                     title: "Units",
@@ -105,21 +110,22 @@ function Dashboard() {
                                     key: "units",
                                     ellipsis: true,
                                     responsive: ['lg'],
+                                    render: (_, element, index) => element.product.units,
+                                },
+                                {
+                                    title: "quantity",
+                                    dataIndex: "qteAlerte",
+                                    key: "qteAlerte",
+                                    ellipsis: true,
+                                    responsive: ['lg'],
+                                    render: (_, element, index) => element.quantity,
                                 },
                                 {
                                     title: "Price",
                                     key: "price",
                                     ellipsis: true,
                                     responsive: ['lg'],
-
-                                },
-                                {
-                                    title: "Alert quantity",
-                                    dataIndex: "qteAlerte",
-                                    key: "qteAlerte",
-                                    ellipsis: true,
-                                    responsive: ['lg'],
-
+                                    render: (_, element, index) => element.product.price + " ₳",
                                 },
                                 {
                                     title: "createdAt",
@@ -128,6 +134,8 @@ function Dashboard() {
                                     align: "center",
                                     ellipsis: true,
                                     responsive: ['lg'],
+                                    render: (_, element, index) => dayjs(element.createdAt).format('YYYY-MM-DD HH:mm:ss'),
+
                                 },
                                 {
                                     title: "Action",
@@ -135,6 +143,8 @@ function Dashboard() {
                                     key: "createdAt",
                                     align: "center",
                                     ellipsis: true,
+                                    render: (_, element,) => <Tag color='red'>Available command
+                                    </Tag>
                                     // render: (e, _) => {
                                     //     return <div className='flex items-center justify-center space-x-3'>
                                     //         <button onClick={() => {
