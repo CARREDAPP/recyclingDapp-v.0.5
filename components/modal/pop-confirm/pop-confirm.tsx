@@ -13,7 +13,7 @@ interface IPopconfirm {
 
 }
 
-function PopConfirm({ onCancel, onConfirm, children, open, title, description, placement, okButtonProps }: React.PropsWithChildren<IPopconfirm>) {
+function PopConfirm({ onCancel, onConfirm, open, title, description, placement, okButtonProps, children }: React.PropsWithChildren<IPopconfirm>) {
     return (
         <Popconfirm
             placement={placement}
