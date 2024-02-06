@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { deleteProducts, getProducts, postProducts, updateProducts } from "./products.service"
+import { deleteProducts, getProducts, postImages, postProducts, updateProducts } from "./products.service"
 import { STATUS } from "@/components/helpers/helpers";
-import { IDELETECategory, IGETProducts, IPOSTProducts, IProducts, IUDATEProducts } from "@/types";
+import { IDELETECategory, IGETProducts, IPOSTProducts, IPostImages, IProducts, IUDATEProducts } from "@/types";
 
 
 const initialState: {
@@ -10,6 +10,7 @@ const initialState: {
     UPDATE_PRODUCT: IUDATEProducts | null,
     DATA_PRODUCT: IProducts | null,
     DELETE_PRODUCT: IDELETECategory | null
+    POST_IMAGE: IPostImages | null
     status_post: {
         isLoading: boolean,
         isSuccess: boolean,
@@ -21,6 +22,11 @@ const initialState: {
         isError: boolean,
     },
     status_delete: {
+        isLoading: boolean,
+        isSuccess: boolean,
+        isError: boolean,
+    },
+    status_img: {
         isLoading: boolean,
         isSuccess: boolean,
         isError: boolean,
@@ -37,6 +43,7 @@ const initialState: {
     GET_PRODUCT: null,
     POST_PRODUCT: null,
     UPDATE_PRODUCT: null,
+    POST_IMAGE: null,
     status_post: {
         isLoading: false,
         isSuccess: false,
@@ -48,6 +55,11 @@ const initialState: {
         isError: false,
     },
     status_delete: {
+        isLoading: false,
+        isSuccess: false,
+        isError: false,
+    },
+    status_img: {
         isLoading: false,
         isSuccess: false,
         isError: false,
@@ -64,6 +76,7 @@ const postproduct = createAsyncThunk('products/add', postProducts);
 const getproduct = createAsyncThunk('products/all', getProducts);
 const updateproduct = createAsyncThunk('products/update', updateProducts);
 const deleteproduct = createAsyncThunk('products/delete', deleteProducts);
+const postImage = createAsyncThunk('products/image', postImages);
 
 const productsService = createSlice({
     initialState: initialState,
@@ -146,6 +159,14 @@ const productsService = createSlice({
         }).addCase(deleteproduct.rejected, (state, { payload }) => {
             state.status_delete = STATUS.ERROR;
             state.message = payload as string
+        }).addCase(postImage.pending, (state) => {
+            state.status_img = STATUS.PENDING;
+        }).addCase(postImage.fulfilled, (state, { payload }) => {
+            state.status_img = STATUS.SUCCESS;
+            state.message = payload.msg
+        }).addCase(postImage.rejected, (state, { payload }) => {
+            state.status_img = STATUS.ERROR;
+            state.message = payload as string
         });
     },
 });
@@ -162,4 +183,4 @@ export const {
     setProductsUpdate
 
 } = productsService.actions;
-export { postproduct, getproduct, updateproduct, deleteproduct }
+export { postproduct, getproduct, updateproduct, deleteproduct, postImage }

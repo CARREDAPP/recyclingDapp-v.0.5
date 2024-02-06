@@ -239,3 +239,12 @@ interface IItemsCard extends IDataSystem {
     Ventes?: IVentes;
     qte?: number
 }
+interface IPostImages extends IDataSystem {
+    data: IImage,
+    msg: string
+}
+interface IImage extends IGlobal {
+    imageUrl: string;
+    is_active: boolean;
+    productId?: string
+}

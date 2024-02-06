@@ -1,3 +1,4 @@
+import { postImage } from '@/components/redux/products/products.slices';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useAppDispatch from '@/hook/use-dispatch'
 import { Button, Form, Modal, Upload } from 'antd'
@@ -31,6 +32,9 @@ function Gallery() {
         setPreviewOpen(true);
         setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1));
     };
+    const onFinish = (e: any) => {
+        dispatch(postImage({ "image": fileList![0].originFileObj }))
+    }
 
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
         setFileList(newFileList)
@@ -52,6 +56,7 @@ function Gallery() {
         >
             <Form
                 layout='vertical'
+                onFinish={onFinish}
             >
                 <Form.Item
                     className='w-full'

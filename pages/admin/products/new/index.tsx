@@ -22,7 +22,7 @@ function NowProducts() {
 
     return (
         <MainAppLayout >
-            <main>
+            <main className='flex flex-col h-full'>
                 <div>
                     <div className="w-full justify-between  box lg:flex items-center">
                         <PageBreadcrumb breadcrumbItems={LINK_PRODUCT} />
