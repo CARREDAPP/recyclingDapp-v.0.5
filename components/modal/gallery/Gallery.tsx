@@ -1,5 +1,6 @@
 import { postImage } from '@/components/redux/products/products.slices';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
+import { useAppSelector } from '@/components/redux/store';
 import useAppDispatch from '@/hook/use-dispatch'
 import { Button, Form, Modal, Upload } from 'antd'
 import type { GetProp, UploadFile, UploadProps } from 'antd';
@@ -11,11 +12,11 @@ function Gallery() {
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     const [fileList, setFileList] = useState<any>();
+    const { SET_PRODUCTS, status_img } = useAppSelector(state => state.createProducts);
+
     type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
     const { dispatch } = useAppDispatch();
-
-
     const getBase64 = (file: FileType): Promise<string> =>
         new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -33,9 +34,8 @@ function Gallery() {
         setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1));
     };
     const onFinish = (e: any) => {
-        dispatch(postImage({ "image": fileList![0].originFileObj }))
+        dispatch(postImage({ "image": fileList![0].originFileObj, productId: SET_PRODUCTS?.id }))
     }
-
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
         setFileList(newFileList)
 
@@ -87,7 +87,7 @@ function Gallery() {
 
                 <div className='flex items-center w-full justify-end'>
                     <Form.Item style={{ marginTop: '10px' }}>
-                        <Button htmlType='submit' loading={false} style={{ backgroundColor: '#006064', color: '#ffff' }} >
+                        <Button htmlType='submit' loading={status_img.isLoading} style={{ backgroundColor: '#006064', color: '#ffff' }} >
                             Upload image
                         </Button>
                     </Form.Item>

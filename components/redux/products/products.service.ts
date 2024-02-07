@@ -52,14 +52,13 @@ export const postImages: AsyncThunkPayloadCreator<IPostImages, any> = async (pay
         const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
         // const { form, ...body } = payload;
         // console.log(payload)
-        const response: AxiosResponse<IPostImages> = await axios.postForm(`${BASE_URL}products/image`, payload, {
+        const response: AxiosResponse<IPostImages> = await axios.postForm(`${BASE_URL}products/image?productId=${payload.productId}`, payload, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${PROFILE?.token}`
 
             }
         });
-        // UseRestartField(form);
         return response.data;
     } catch (error) {
         return axios.isAxiosError(error)
@@ -100,7 +99,6 @@ export const deleteProducts: AsyncThunkPayloadCreator<any, any> = async (payload
 
             }
         });
-        console.log(response.data)
         return response.data;
     } catch (error) {
         return axios.isAxiosError(error)

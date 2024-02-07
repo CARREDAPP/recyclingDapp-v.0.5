@@ -1,7 +1,7 @@
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
 import MainAppLayout from '@/components/layouts/MainAppLayout';
 import PopConfirm from '@/components/modal/pop-confirm/pop-confirm';
-import { deleteproduct, setProductsUpdate } from '@/components/redux/products/products.slices';
+import { deleteproduct, serProductId, setProductsUpdate } from '@/components/redux/products/products.slices';
 import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useAppDispatch from '@/hook/use-dispatch';
 import useProducts from '@/hook/use-products';
@@ -126,6 +126,7 @@ function NowProducts() {
                                         }} className='bg-[#006064] p-1 rounded-lg w-8 h-8 shadow-2xl shadow-slate-700 border flex items-center justify-center text-white'><GrUpdate />
                                         </button>
                                         <button onClick={() => {
+                                            dispatch(serProductId(_))
                                             dispatch(showModal('show-add-gallery'))
                                         }} className='bg-gray-200 text-black p-1 rounded-lg w-8 h-8 shadow-2xl shadow-slate-700 border flex items-center justify-center'><IoCloudUploadOutline />
                                         </button>

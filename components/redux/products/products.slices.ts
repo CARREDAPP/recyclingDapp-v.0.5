@@ -9,6 +9,7 @@ const initialState: {
     GET_PRODUCT: IGETProducts | null
     UPDATE_PRODUCT: IUDATEProducts | null,
     DATA_PRODUCT: IProducts | null,
+    SET_PRODUCTS: IProducts | null
     DELETE_PRODUCT: IDELETECategory | null
     POST_IMAGE: IPostImages | null
     status_post: {
@@ -38,6 +39,7 @@ const initialState: {
     },
     message: string | null,
 } = {
+    SET_PRODUCTS: null,
     DATA_PRODUCT: null,
     DELETE_PRODUCT: null,
     GET_PRODUCT: null,
@@ -102,6 +104,10 @@ const productsService = createSlice({
         },
         setDeleteProductsIsError: (state, { payload }) => {
             state.status_delete.isError = payload;
+        },
+
+        serProductId: (state, { payload }) => {
+            state.SET_PRODUCTS = payload;
         }
     },
     extraReducers(builder) {
@@ -180,7 +186,8 @@ export const {
     setPatchProductsIsSuccess,
     setPostProductsIsError,
     setPostProductsIsSuccess,
-    setProductsUpdate
+    setProductsUpdate,
+    serProductId
 
 } = productsService.actions;
 export { postproduct, getproduct, updateproduct, deleteproduct, postImage }

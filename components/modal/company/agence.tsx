@@ -5,7 +5,6 @@ import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import { countries } from '@/types/nationalite';
 import { postEntreprises } from '@/components/redux/company/company.slice';
 import { useAppSelector } from '@/components/redux/store';
-import Image from 'next/image';
 
 function Agence() {
     const { dispatch } = useAppDispatch();
@@ -13,15 +12,14 @@ function Agence() {
     const { status_post } = useAppSelector(state => state.createCompany);
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         const getLocation = () => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position): any => {
-                        setLatitude(position.coords.latitude as any);
-                        setLongitude(position.coords.longitude as any);
+                        setLatitude(position?.coords?.latitude as any);
+                        setLongitude(position?.coords?.longitude as any);
                     },
 
                 );
@@ -41,6 +39,7 @@ function Agence() {
             ville: e.ville,
             avenue: e.avenue,
             codePostale: e.codePostale,
+            typeCompany: e.typeCompany,
             longitute: longitude,
             latitude: latitude,
             form
@@ -52,7 +51,7 @@ function Agence() {
         <Drawer
             width={750}
             title={<p className='text-2xl text-slate-600 dark:text-[#f3f4f6] font-extrabold'>
-                New Company
+                New Household
             </p>}
             open={true}
             onClose={() => dispatch(showModal('close'))}
@@ -85,6 +84,44 @@ function Agence() {
                         },
                     ]}>
                     <Input size='middle' placeholder="Enter the Digital Adress" />
+                </Form.Item>
+                <Form.Item
+                    style={{ marginBottom: '6px' }}
+                    label={'Type company (Household)'}
+                    name={'typeCompany'}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Please select the type of company",
+                        },
+                    ]}
+                >
+                    <Select
+                        showSearch
+                        size="middle"
+                        placeholder="Select the type of company"
+                        filterOption={(inputValue, option) => {
+                            return (
+                                option?.value?.toUpperCase().indexOf(inputValue?.toUpperCase()) !== -1
+                            );
+                        }}
+                        options={[
+                            {
+                                value: 'household',
+                                label: 'Household',
+                            },
+                            {
+                                value: 'recycling Company',
+                                label: 'Recycling Company',
+                            },
+                            {
+                                value: 'institution/Entreprise',
+                                label: 'Institution/Entreprise',
+                            }
+                        ]}
+
+                    />
+
                 </Form.Item>
                 <Form.Item
                     style={{ marginBottom: '6px' }}
