@@ -3,16 +3,11 @@ import { useEffect, useState } from 'react';
 import { HSThemeAppearance } from '@/utils/theme';
 import { Theme, subString } from '@/types/types';
 import { ThemeToggle } from '../global/ThemeToggle';
-import { UserProfileButton } from '../global/UserProfileButton';
-import useAuth from '@/hook/use-auth';
 import { FiLoader } from 'react-icons/fi';
-import { AiOutlineShopping } from 'react-icons/ai';
 import { useAppSelector } from '../redux/store';
 import { showModal } from '../redux/show-modal/slice.showmodal';
 import useAppDispatch from '@/hook/use-dispatch';
 import { FaWallet } from "react-icons/fa6";
-import useLockFunds from '@/hook/use-lockFunds';
-import useUnlock from '@/hook/use-unlock';
 
 const Navbar = () => {
     const [theme, setTheme] = useState<Theme>('default');
