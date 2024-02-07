@@ -117,6 +117,7 @@ export interface IEntreprise extends IGlobal {
     mailCompany: string,
     nationalite: string,
     province: string,
+    typeCompany: string,
     ville: string,
     avenue: string,
     codePostale: string,

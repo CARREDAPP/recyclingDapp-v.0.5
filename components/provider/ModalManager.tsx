@@ -10,6 +10,7 @@ import Agence from '@/components/modal/company/agence';
 import Gallery from '../modal/gallery/Gallery';
 import Supplies from '../modal/supplies/Supplies';
 import ModalWallet from '../modal/wallet';
+import GalleryCompany from '../modal/gallery/Company_Gallery';
 
 function ModalManager() {
     const { is_open, is_open_sub } = useAppSelector(state => state.createShownModal);
@@ -25,6 +26,7 @@ function ModalManager() {
             {is_open === 'show-add-gallery' && <Gallery />}
             {is_open === 'show-add-supply' && <Supplies />}
             {is_open === 'show-wallet' && <ModalWallet />}
+            {is_open === 'show-logo-company' && <GalleryCompany />}
 
         </div>
     )

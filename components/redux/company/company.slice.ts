@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { STATUS } from "@/components/helpers/helpers";
-import { ICategory, IDELETECategory, IEntreprise, IGETCategory, IGETEntreprise, IPOSTCategory, IUPDATECategory, IUPDATEEntreprise } from "@/types";
-import { getCompany, postCompany } from "./company.service";
+import { ICategory, IDELETECategory, IEntreprise, IGETCategory, IGETEntreprise, IPOSTCategory, IPOSTEntreprise, IUPDATECategory, IUPDATEEntreprise } from "@/types";
+import { getCompany, postCompany, updateImageCompany } from "./company.service";
 
 
 const initialState: {
@@ -9,7 +9,8 @@ const initialState: {
     GET_COMPANY: IGETEntreprise | null
     UPDATE_COMPANY: IUPDATEEntreprise | null,
     DATA_COMPANY: IEntreprise | null,
-    DELETE_COMPANY: IUPDATEEntreprise | null
+    DELETE_COMPANY: IUPDATEEntreprise | null,
+    PATCH_PRODUCTS: IPOSTEntreprise | null,
     status_post: {
         isLoading: boolean,
         isSuccess: boolean,
@@ -30,8 +31,14 @@ const initialState: {
         isSuccess: boolean,
         isError: boolean,
     },
+    status_img: {
+        isLoading: boolean,
+        isSuccess: boolean,
+        isError: boolean,
+    },
     message: string | null,
 } = {
+    PATCH_PRODUCTS: null,
     DATA_COMPANY: null,
     DELETE_COMPANY: null,
     GET_COMPANY: null,
@@ -52,6 +59,11 @@ const initialState: {
         isSuccess: false,
         isError: false,
     },
+    status_img: {
+        isLoading: false,
+        isSuccess: false,
+        isError: false,
+    },
     status: {
         isLoading: false,
         isSuccess: false,
@@ -61,6 +73,8 @@ const initialState: {
 }
 const postEntreprises = createAsyncThunk('company/add', postCompany);
 const getEntreprises = createAsyncThunk('company/get', getCompany);
+const patchEntreprises = createAsyncThunk('company/image', updateImageCompany);
+
 
 const companySlice = createSlice({
     initialState,
@@ -70,7 +84,13 @@ const companySlice = createSlice({
             state.status_post.isError = payload;
         },
         setCompanyIsError: (state, { payload }) => {
+            state.status_img.isError = payload;
+        },
+        setCompanyImageIsSuccess: (state, { payload }) => {
             state.status_post.isError = payload;
+        },
+        setCompanyImageIsError: (state, { payload }) => {
+            state.status_img.isError = payload;
         },
     },
     extraReducers(builder) {
@@ -90,11 +110,19 @@ const companySlice = createSlice({
         }).addCase(getEntreprises.rejected, (state, { payload }) => {
             state.status = STATUS.ERROR;
             state.message = payload as string;
+        }).addCase(patchEntreprises.pending, (state) => {
+            state.status_img = STATUS.PENDING;
+        }).addCase(patchEntreprises.fulfilled, (state, { payload }) => {
+            state.status_img = STATUS.SUCCESS;
+            state.PATCH_PRODUCTS = payload
+        }).addCase(patchEntreprises.rejected, (state, { payload }) => {
+            state.status_img = STATUS.ERROR;
+            state.message = payload as string;
         })
     },
 })
 
 
 export default companySlice.reducer;
-export { postEntreprises, getEntreprises }
-export const { setCompanyIsError, setCompanyIsSuccess } = companySlice.actions
+export { postEntreprises, getEntreprises, patchEntreprises }
+export const { setCompanyIsError, setCompanyIsSuccess, setCompanyImageIsError, setCompanyImageIsSuccess } = companySlice.actions

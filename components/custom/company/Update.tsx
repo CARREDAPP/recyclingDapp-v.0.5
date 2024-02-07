@@ -141,19 +141,37 @@ function Update({ data }: IGETEntreprise) {
                         <Input size='middle' placeholder="Enter the street" />
                     </Form.Item>
                 </div>
-                <Form.Item
-                    initialValue={data?.codePostale}
-                    style={{ marginBottom: '6px' }}
-                    label={'ZIP code'}
-                    name={'codePostale'}
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter the ZIP code",
-                        },
-                    ]}>
-                    <Input size='middle' placeholder="Enter the ZIP code" />
-                </Form.Item>
+
+                <div className='flex items-center space-x-4'>
+                    <Form.Item
+                        className='w-full'
+                        initialValue={data?.codePostale}
+                        style={{ marginBottom: '6px' }}
+                        label={'ZIP code'}
+                        name={'codePostale'}
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please enter the ZIP code",
+                            },
+                        ]}>
+                        <Input size='middle' placeholder="Enter the ZIP code" />
+                    </Form.Item>
+                    <Form.Item
+                        className='w-full'
+                        initialValue={data?.typeCompany}
+                        style={{ marginBottom: '6px' }}
+                        label={'Type Company'}
+                        name={'typeCompany'}
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please enter the ZIP code",
+                            },
+                        ]}>
+                        <Input size='middle' placeholder="Enter the ZIP code" />
+                    </Form.Item>
+                </div>
 
                 {/* <div className='flex items-center space-x-4'>
                     <Form.Item

@@ -1,12 +1,10 @@
 import Profils from '@/components/custom/company/Profils';
-import BuildTitle from '@/components/custom/company/Title';
 import Update from '@/components/custom/company/Update';
 import PageBreadcrumb from '@/components/global/PageBreadcrumb';
-import IconShadowWidget from '@/components/helpers/showicon';
 import MainAppLayout from '@/components/layouts/MainAppLayout';
+import { showModal } from '@/components/redux/show-modal/slice.showmodal';
 import useCompany from '@/hook/use-company';
 import { LINK_SETTINGS } from '@/utils/linkNavigator';
-import { Button, Form, Input, Table, Spin } from 'antd';
 import React, { useState } from 'react'
 import { PiCameraDuotone } from "react-icons/pi";
 
@@ -25,7 +23,7 @@ function Company() {
                     </div>
                 </div>
                 <div className='flex-grow  bg-cover bg dark:bg-primary-dark relative bg-[#006064] py-3' style={{ backgroundImage: "url('/img/logo.png')" }}>
-                    <button className='absolute right-2 p-3 border flex items-center text-white space-x-2 rounded-lg font-bold'>
+                    <button onClick={() => dispatch(showModal('show-logo-company'))} className='absolute right-2 p-3 border flex items-center text-white space-x-2 rounded-lg font-bold'>
                         <PiCameraDuotone className='text-xl' />
                         <span>Change cover</span>
                     </button>

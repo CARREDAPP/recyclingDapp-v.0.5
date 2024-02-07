@@ -41,3 +41,22 @@ export const getCompany: AsyncThunkPayloadCreator<IGETEntreprise> = async (paylo
 
     }
 }
+
+
+export const updateImageCompany: AsyncThunkPayloadCreator<IPOSTEntreprise, any> = async (payload, thunkAPI) => {
+    try {
+        const { createUser: { PROFILE } } = thunkAPI.getState() as RootState;
+        const response: AxiosResponse<IPOSTEntreprise> = await axios.patchForm(`${BASE_URL}/entreprise/image`, payload, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${PROFILE?.token}`
+            }
+        })
+        return response.data;
+    } catch (error) {
+        return axios.isAxiosError(error)
+            ? thunkAPI.rejectWithValue(returnApiError(error))
+            : thunkAPI.rejectWithValue('Auth error')
+
+    }
+}
