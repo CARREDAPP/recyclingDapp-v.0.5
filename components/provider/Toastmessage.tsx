@@ -13,7 +13,7 @@ function Toastmessage() {
     const [tost, contextHolder] = Tost.useMessage({ maxCount: 1, });
     const { dispatch } = useAppDispatch();
     const { status_delete: is_delete_category, status_post: is_post_category, status_update: is_update_category, message: message_category } = useAppSelector(state => state.createCategory)
-    const { status_delete: is_delete_products, status_post: is_post_products, status_update: is_update_products, message: message_products } = useAppSelector(state => state.createProducts)
+    const { status_delete: is_delete_products, status_post: is_post_products, status_update: is_update_products, message: message_products, status_img: is_status_img } = useAppSelector(state => state.createProducts)
     const { status_post: is_post_company, message: message_compny } = useAppSelector(state => state.createCompany);
     const { status_auth: is_status_login, message: message_user } = useAppSelector(state => state.createUser);
     const { is_status_post: is_status_supply, message: message_supply } = useAppSelector(state => state.createSupply);
@@ -117,7 +117,7 @@ function Toastmessage() {
 
     useEffect(() => {
         if (is_post_company.isSuccess) {
-            message_products && tost.success(message_compny);
+            message_compny && tost.success(message_compny);
             dispatch(company.setCompanyIsSuccess(false));
         }
         if (is_post_company.isError) {
@@ -126,6 +126,16 @@ function Toastmessage() {
         }
     }, [, dispatch, is_post_company]);
 
+    useEffect(() => {
+        if (is_status_img.isSuccess) {
+            message_products && tost.success(message_products);
+            dispatch(products.setPostImageIsError(false));
+        }
+        if (is_status_img.isError) {
+            message_products && tost.error(message_products);
+            dispatch(products.setPostImageIsError(false));
+        }
+    }, [, dispatch, is_status_img]);
 
     return (
         <div>

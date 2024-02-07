@@ -93,6 +93,12 @@ const productsService = createSlice({
         setPostProductsIsError: (state, { payload }) => {
             state.status_post.isError = payload;
         },
+        setPostImageIsSuccess: (state, { payload }) => {
+            state.status_img.isSuccess = payload;
+        },
+        setPostImageIsError: (state, { payload }) => {
+            state.status_img.isError = payload;
+        },
         setPatchProductsIsSuccess: (state, { payload }) => {
             state.status_update.isSuccess = payload;
         },
@@ -187,7 +193,8 @@ export const {
     setPostProductsIsError,
     setPostProductsIsSuccess,
     setProductsUpdate,
-    serProductId
+    serProductId,
+    setPostImageIsError, setPostImageIsSuccess
 
 } = productsService.actions;
 export { postproduct, getproduct, updateproduct, deleteproduct, postImage }
