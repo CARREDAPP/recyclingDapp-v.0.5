@@ -24,45 +24,47 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className='flex-grow bg-white dark:bg-primary-dark space-y-4'>
-                    <div className='w-full flex items-start justify-center p-2 '>
-                        <CardItems
-                            icon={<FaChartLine className='text-2xl text-white' />}
-                            designation='Available command'
-                            count={(GET_SALE?.data.length) ?? 0}
-                            categories='Command'
-                            pourcentage='%100'
-                            className='bg-teal-700 text-xl'
-                            background='p-2 bg-teal-700 rounded opacity shadow shadow-sky-200 flex items-center justify-center'
-                        />
-                        <CardItems
-                            icon={<MdOutlineDashboardCustomize className='text-2xl text-white' />}
-                            designation='Nombres Actions'
-                            count={100}
-                            categories='Containers'
-                            pourcentage='%100'
-                            className='bg-cyan-700 text-xl'
-                            background='p-2 bg-cyan-700 rounded opacity shadow shadow-sky-200 flex items-center justify-center'
-                        />
-                        <CardItems
-                            icon={<MdOutlineDashboardCustomize className='text-2xl text-white' />}
-                            designation='Nombres Publicité'
-                            count={100}
-                            categories='Containers'
-                            pourcentage='%100'
-                            className='bg-amber-950 text-xl'
-                            background='p-2 bg-amber-950 rounded opacity shadow shadow-sky-200 flex items-center justify-center'
-                        />
-                        <CardItems
-                            icon={<IoWalletOutline className='text-2xl text-white' />}
-                            designation='Balance'
-                            count={fromLovelace(infoWallet?.balance[0]?.quantity! ?? '0.0') as any ?? 0.0}
-                            categories={infoWallet?.network == 1 ? "Mainnet" : "Preprod"}
-                            pourcentage='%100'
-                            className='bg-red-600 text-xl'
-                            background='p-2 bg-red-500 rounded opacity shadow shadow-sky-200 flex items-center justify-center'
-                        />
+                    <div className='container mx-auto px-4 lg:px-0'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+                            <CardItems
+                                icon={<FaChartLine className='text-2xl text-white' />}
+                                designation='Available command'
+                                count={(GET_SALE?.data.length) ?? 0}
+                                categories='Command'
+                                pourcentage='%100'
+                                className='bg-teal-700 text-xl'
+                                background='p-2 bg-teal-700 rounded opacity shadow shadow-sky-200 flex items-center justify-center'
+                            />
+                            <CardItems
+                                icon={<MdOutlineDashboardCustomize className='text-2xl text-white' />}
+                                designation='Nombres Actions'
+                                count={100}
+                                categories='Containers'
+                                pourcentage='%100'
+                                className='bg-cyan-700 text-xl'
+                                background='p-2 bg-cyan-700 rounded opacity shadow shadow-sky-200 flex items-center justify-center'
+                            />
+                            <CardItems
+                                icon={<MdOutlineDashboardCustomize className='text-2xl text-white' />}
+                                designation='Nombres Publicité'
+                                count={100}
+                                categories='Containers'
+                                pourcentage='%100'
+                                className='bg-amber-950 text-xl'
+                                background='p-2 bg-amber-950 rounded opacity shadow shadow-sky-200 flex items-center justify-center'
+                            />
+                            <CardItems
+                                icon={<IoWalletOutline className='text-2xl text-white' />}
+                                designation='Balance'
+                                count={fromLovelace(infoWallet?.balance[0]?.quantity! ?? '0.0') as any ?? 0.0}
+                                categories={infoWallet?.network == 1 ? "Mainnet" : "Preprod"}
+                                pourcentage='%100'
+                                className='bg-red-600 text-xl'
+                                background='p-2 bg-red-500 rounded opacity shadow shadow-sky-200 flex items-center justify-center'
+                            />
+                        </div>
                     </div>
-                    <div className=' p-4'>
+                    <div className='container mx-auto px-4 lg:px-0'>
                         <Table
                             loading={is_status.isLoading}
                             bordered={false}

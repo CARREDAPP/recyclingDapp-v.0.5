@@ -75,7 +75,7 @@ function Agence() {
                 </Form.Item>
                 <Form.Item
                     style={{ marginBottom: '6px' }}
-                    label={'Digital Adress'}
+                    label={'Wallet Adress'}
                     name={'digitalAdress'}
                     rules={[
                         {
@@ -231,7 +231,7 @@ function Agence() {
                     name={'codePostale'}
                     rules={[
                         {
-                            required: true,
+                            required: false,
                             message: "Please enter the ZIP code",
                         },
                     ]}>

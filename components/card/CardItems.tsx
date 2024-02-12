@@ -15,7 +15,7 @@ interface IElementCard {
 
 function CardItems({ count, designation, className, categories, pourcentage, background, icon }: IElementCard) {
     return (
-        <div className='bg-white dark:bg-slate-700 h-24 w-1/3 shadow shadow-slate-200 dark:shadow-slate-700 rounded pl-2 py-2 flex flex-col justify-between m-2 border-l-sky-900'>
+        <div className='bg-white dark:bg-slate-700 h-24 w-full shadow shadow-slate-200 dark:shadow-slate-700 rounded pl-2 py-2 flex flex-col justify-between m-2 border-l-sky-900'>
             <div className='flex justify-between h-14 space-x-2'>
                 <div className='bg-red-500 p-0.5 rounded-full h-full'></div>
                 <div className='w-56'>
