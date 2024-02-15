@@ -3,11 +3,9 @@ import React from 'react'
 
 function RolesUser() {
     return (
-        <MainAppLayout >
-            <main>
+        <main>
 
-            </main>
-        </MainAppLayout>
+        </main>
     )
 }
 

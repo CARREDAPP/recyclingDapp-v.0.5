@@ -8,7 +8,7 @@ function Customer() {
     const [filter, setfilter] = useState<string | undefined>('');
 
     return (
-        <MainAppLayout >
+        < >
             <main>
                 <div>
                     <div className="w-full justify-between  box lg:flex items-center">
@@ -168,7 +168,7 @@ function Customer() {
                     />
                 </div>
             </main>
-        </MainAppLayout>
+        </>
     )
 }
 

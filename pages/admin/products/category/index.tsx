@@ -20,7 +20,7 @@ function Category() {
     const { GET_CATEGORY, status, dispatch, status_delete, status_update } = useCategory();
 
     return (
-        <MainAppLayout>
+        <>
             <main>
                 <div>
                     <div className="w-full justify-between  box lg:flex items-center">
@@ -159,7 +159,7 @@ function Category() {
                     />
                 </div>
             </main>
-        </MainAppLayout>
+        </>
     )
 }
 

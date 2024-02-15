@@ -21,7 +21,7 @@ function NowProducts() {
     const { GET_PRODUCT, status, status_delete } = useProducts();
 
     return (
-        <MainAppLayout >
+        < >
             <main className='flex flex-col h-full'>
                 <div>
                     <div className="w-full justify-between  box lg:flex items-center">
@@ -192,7 +192,7 @@ function NowProducts() {
                     />
                 </div>
             </main>
-        </MainAppLayout>
+        </>
     )
 }
 
