@@ -1,11 +1,10 @@
 import Input from '@/components/global/CustomInput';
-import RootLayout from '@/components/layouts/LayoutLogin';
 import { Button } from 'antd';
 import Link from 'next/link';
 import React from 'react'
 import { useState } from 'react';
 
-function ForgetPassword() {
+function EnableCompte() {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -14,7 +13,7 @@ function ForgetPassword() {
         <div className='p-4 sm:p-7'>
             <div className='text-center'>
                 <h1 className='block text-2xl font-bold text-gray-800 dark:text-white'>
-                    Forgot your password?
+                    ACTIVE YOUR COMPTE
                 </h1>
                 <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
                     <Link
@@ -43,12 +42,11 @@ function ForgetPassword() {
                             required
                             aria-describedby='email-error'
                         />
-                        {/* End Form Group */}
                         <Button
                             style={{ backgroundColor: '#006064', color: '#fff' }}
                             className='h-11'
                             htmlType='submit'>
-                            Reset password
+                            Activate your account
                         </Button>
                     </div>
                 </form>
@@ -58,4 +56,5 @@ function ForgetPassword() {
     );
 }
 
-export default ForgetPassword
+export default EnableCompte
+// Recycler davantage de plastiques peut aider les entreprises locales et créer des emplois tout en soutenant les objectifs de durabilité.

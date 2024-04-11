@@ -1,8 +1,5 @@
 import { Metadata } from "next";
-import MainAppLayout from "./MainAppLayout";
-import NotConnected from "../global/NotConnection";
 import useAuth from "@/hook/use-auth";
-import MainLogin from "./LayoutLogin";
 import { usePathname } from "next/navigation";
 'next/navigation'
 export const metadata: Metadata = {

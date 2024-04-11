@@ -14,6 +14,7 @@ import RootLayout from '@/components/layouts/LayoutLogin';
 const Container = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
     const MainLayout = pathname.includes('admin') ? MainAppLayout : RootLayout;
+
     useEffect(() => {
         import('preline');
         HSThemeAppearance.init();

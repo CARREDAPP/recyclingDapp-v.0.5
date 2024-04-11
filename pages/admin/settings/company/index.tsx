@@ -13,20 +13,19 @@ function Company() {
     const [filter, setfilter] = useState<string | undefined>('');
     const { GET_COMPANY, dispatch, status } = useCompany();
     return (
-        <main className='flex flex-col h-full '>
+        <main className='flex flex-col min-h-screen w-full'>
             <div>
                 <div className="w-full justify-between  box lg:flex items-center">
                     <PageBreadcrumb breadcrumbItems={LINK_SETTINGS} />
                 </div>
-                <div className='py-2 w-full justify-between  box lg:flex items-center '>
-                </div>
+
             </div>
-            <div className='flex-grow  bg-cover bg dark:bg-primary-dark relative bg-[#006064] py-3' style={{ backgroundImage: "url('/img/logo.png')" }}>
+            <div className='flex-grow h-full  bg-cover bg dark:bg-primary-dark relative bg-[#006064] py-3' style={{ backgroundImage: "url('/img/logo.png')" }}>
                 <button onClick={() => dispatch(showModal('show-logo-company'))} className='absolute right-2 p-3 border flex items-center text-white space-x-2 rounded-lg font-bold'>
                     <PiCameraDuotone className='text-xl' />
                     <span>Change cover</span>
                 </button>
-                <div className='w-full grid grid-cols-4 bg-transparent absolute bottom-0  bg-white '>
+                <div className='w-full grid grid-cols-4 bg-transparent absolute bottom-0 '>
                     <Profils data={GET_COMPANY?.data!} msg='' />
                     <Update data={GET_COMPANY?.data!} msg='' />
                 </div>

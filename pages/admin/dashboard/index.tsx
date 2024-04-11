@@ -64,8 +64,9 @@ function Dashboard() {
                         />
                     </div>
                 </div>
-                <div className='container mx-auto px-4 lg:px-0'>
+                <div className='container mx-auto px-4 lg:px-0 '>
                     <Table
+                        className='min-h-screen'
                         loading={is_status.isLoading}
                         bordered={false}
                         dataSource={GET_SALE?.data}

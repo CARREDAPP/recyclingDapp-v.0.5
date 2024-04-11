@@ -4,7 +4,6 @@ import { FiHome } from "react-icons/fi";
 import { LuMailPlus } from "react-icons/lu";
 import { BiPhone } from 'react-icons/bi';
 import { GoLocation } from "react-icons/go";
-import { FaWallet } from "react-icons/fa6";
 import { BsPinMapFill } from "react-icons/bs";
 import { IGETEntreprise } from '@/types';
 import { subString } from '@/utils/convertir';
@@ -13,7 +12,7 @@ import { SiWalletconnect } from "react-icons/si";
 
 function Profils(profils: IGETEntreprise) {
     return (
-        <main className='bg-white shadow-md h-full p-4 flex justify-start items-center -translate-y-24 mx-9 flex-col rounded'>
+        <main className=' bg-white shadow-md h-full p-4 flex justify-start items-center -translate-y-24 mx-9 flex-col rounded'>
             <BuildTitle
                 icon={<FiHome className='text-white' />}
                 label='Company name'

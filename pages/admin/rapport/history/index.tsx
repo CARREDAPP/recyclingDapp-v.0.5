@@ -8,7 +8,7 @@ function History() {
     const [filter, setfilter] = useState<string | undefined>('');
 
     return (
-        <MainAppLayout >
+        < >
 
             <main>
                 <div>
@@ -169,7 +169,7 @@ function History() {
                     />
                 </div>
             </main>
-        </MainAppLayout>
+        </>
     )
 }
 

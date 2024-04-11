@@ -4,11 +4,10 @@ import MainAppLayout from '@/components/layouts/MainAppLayout'
 function Helpers() {
 
     return (
-        <MainAppLayout>
-            <main>
 
-            </main>
-        </MainAppLayout>
+        <main>
+
+        </main>
     )
 }
 
