@@ -51,7 +51,7 @@ const initialState: {
     UPDATE_USER: null,
     BLOCK_USER: null,
     PROFILE: typeof window !== 'undefined'
-        ? getCookies('session-user') && JSON.parse(getCookies('session-user')!)
+        ? getCookies('session-user-custom') && JSON.parse(getCookies('session-user-custom')!)
         : null,
 
     status_post: {
@@ -119,7 +119,7 @@ const userService = createSlice({
             state.status_delete.isError = payload;
         },
         logoutUser: (state) => {
-            removeCookies('session-user');
+            removeCookies('session-user-custom');
             state.PROFILE = null;
             window.location.replace('/');
         },
@@ -214,7 +214,7 @@ const userService = createSlice({
             state.status_auth = STATUS.PENDING;
         }).addCase(authuser.fulfilled, (state, { payload }) => {
             state.PROFILE = payload;
-            setCookies('session-user', JSON?.stringify(payload));
+            setCookies('session-user-custom', JSON?.stringify(payload));
             state.status_auth = STATUS.SUCCESS;
             state.message = payload.msg;
         }).addCase(authuser.rejected, (state, { payload }) => {

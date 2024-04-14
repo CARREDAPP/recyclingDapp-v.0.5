@@ -16,7 +16,7 @@ const useAuth = () => {
     };
 
     useEffect(() => {
-        const profile = JSON.parse(localStorage.getItem('session-user')!);
+        const profile = JSON.parse(localStorage.getItem('session-user-custom')!);
         if (!user.PROFILE && profile) dispatch(loadUserData(profile));
     }, [dispatch, user.PROFILE]);
 

@@ -35,7 +35,7 @@ function Home() {
   const { user } = useAuth();
   const router = useRouter();
   useEffect(() => {
-    if (user.PROFILE || getCookies('session-user')!) router.push('/admin/dashboard');
+    if (user.PROFILE || getCookies('session-user-custom')!) router.push('/admin/dashboard');
   });
   return (
     <div className='p-4 sm:p-7 '>
