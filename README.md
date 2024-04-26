@@ -17,9 +17,11 @@ pnpm dev
   v1 custom part
   Backend for to app
 ```
-
+Ope .[[https://carredapp.io/](https://carredapp.io/)]  with your browser to see the result.
+or  in local
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
+for connect my wallet i using the librery mesh [https://meshjs.dev/guides](https://meshjs.dev/guides) if you 
+want to visit this website
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
